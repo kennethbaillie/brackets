@@ -1,35 +1,68 @@
 local pandoc = require 'pandoc'
 
--- Function to extract and categorize lines by names in square brackets
+-- List of names to exclude
+local exclude_names = { ["X"] = true, ["x"] = true, ["doi"] = true, ["PMID"] = true }
+
+-- Function to check if a name should be excluded
+local function should_exclude(name)
+  return exclude_names[name] ~= nil
+end
+
+-- Function to extract lines by name and trace back headers
 local function extract_lines_by_name(blocks)
   local name_dict = {}
-  
+  local header_stack = {}
+
   -- Iterate through each block in the document
-  for _, block in pairs(blocks) do
-    if block.t == 'Para' then
+  for _, block in ipairs(blocks) do
+    if block.t == 'Header' then
+      -- Push the current header onto the stack
+      table.insert(header_stack, block)
+    elseif block.t == 'Para' then
       -- Convert the block to plain text
       local content = pandoc.utils.stringify(block)
 
-      -- Find lines with names in square brackets
-      local name = content:match('%[(.-)%]')
-      if name then
-        -- Add the line to the corresponding name's list
-        if not name_dict[name] then
-          name_dict[name] = {}
+      -- Find all names in square brackets
+      for bracketed_content in content:gmatch('%[(.-)%]') do
+        -- Split the bracketed content into individual names
+        for name in bracketed_content:gmatch('[^,]+') do
+          name = name:match('^%s*(.-)%s*$') -- trim whitespace
+          if not should_exclude(name) then
+            -- Ensure the name has an entry in the name_dict
+            if not name_dict[name] then
+              name_dict[name] = {}
+            end
+
+            -- Gather the header trail as plain text
+            local header_text = ""
+            for _, header in ipairs(header_stack) do
+              header_text = header_text .. string.rep("  ", header.level) .. pandoc.utils.stringify(header) .. "\n"
+            end
+
+            -- Add the header trail and the paragraph to the name's list
+            if #header_text > 0 then
+              if not name_dict[name][header_text] then
+                name_dict[name][header_text] = {}
+              end
+              table.insert(name_dict[name][header_text], block)
+            end
+          end
         end
-        table.insert(name_dict[name], block)
       end
     end
   end
 
   -- Create new blocks for each name
   local new_blocks = {}
-  for name, lines in pairs(name_dict) do
+  for name, sections in pairs(name_dict) do
     -- Insert a header for the name
     table.insert(new_blocks, pandoc.Header(1, name))
-    -- Insert the associated lines
-    for _, line in ipairs(lines) do
-      table.insert(new_blocks, line)
+    -- Insert the associated headers as plain text and lines
+    for header_text, lines in pairs(sections) do
+      table.insert(new_blocks, pandoc.Plain{pandoc.Str(header_text)})
+      for _, line in ipairs(lines) do
+        table.insert(new_blocks, line)
+      end
     end
   end
 
@@ -41,5 +74,3 @@ function Pandoc(doc)
   local new_blocks = extract_lines_by_name(doc.blocks)
   return pandoc.Pandoc(new_blocks, doc.meta)
 end
-
-
