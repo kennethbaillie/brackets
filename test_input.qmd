@@ -1,20 +1,33 @@
 ---
 title: "Your Document Title"
-format: html
+filters: [brackets.lua]
 ---
 
-# Gen
+# Header for the main section
 
-## Sparkt
+## Subdivision One
 
-### Moo
+Nothing in here should be displayed
+Not this or this or this
+
+## Subdivision Two [Jeremy]
+
+### Work package One
 
 This is a sentence with [Tom, Dick].
 Another line with [Dick, Harry].
 And a third line with [Tom, Harry, Bob].
+This line is a task for someone [Jane]  
 
-And actually a fourth one, now added. [Jane]
-What about this then [Jemima, Dudo]
-
-
+- [x] What about this then [Jemima, Dudo]  
 Dudo is not going to do this. But we can sack him.
+
+### Work package Two
+
+- [x] Here's a task [Jemima, Dudo]
+- [ ] This task is not completed
+- [x] Kenny did this one [Kenny] 
+
+## Gerbil wrestling [Bandit]
+
+- confirm it is in his nature for this [Sunbear]

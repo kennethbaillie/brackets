@@ -1,32 +1,29 @@
 local pipe = pandoc.pipe
 
 function pull_names(content)
-  -- Specify the path to your Python script
-  local py_script_path = "brackets.py"
-
-  -- Run the Python script and pass the content to it
-  local result = pipe('python', {py_script_path}, content)
-  
+  local py_script = "brackets.py"
+  local result = pipe('python', {py_script}, content)
   if result == "" then
     return {}
   end
-  
-  -- Parse the result as Markdown and return the blocks
   return pandoc.read(result, "markdown").blocks
 end
 
+function Meta(meta)
+  meta.format = meta.format or {}
+  meta.format.html = meta.format.html or {}
+  meta.format.html.toc = true
+  meta.format.html["toc-location"] = "left"
+  return meta
+end
+
 function Pandoc(doc)
-  -- Convert the document to markdown to get the raw content
   local content = pandoc.write(doc, 'markdown')
-  
-  -- Process the content with the Python script
   local processed_blocks = pull_names(content)
-  
-  -- Append the processed blocks to the original document
-  for _, block in ipairs(processed_blocks) do
-    table.insert(doc.blocks, block)
-  end
-  
-  -- Return the modified document
-  return doc
+  local new_doc = pandoc.Pandoc(processed_blocks)
+  new_doc.meta.title = pandoc.MetaString("People")
+  new_doc.meta = Meta(new_doc.meta)
+  print("ready")
+  print(new_doc.meta)
+  return new_doc
 end
