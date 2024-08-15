@@ -2,6 +2,7 @@
 title: "Your Document Title"
 filters: [brackets.lua]
 ---
+toc: true
 
 # Header for the main section
 
