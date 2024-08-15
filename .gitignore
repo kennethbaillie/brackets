@@ -1,0 +1,45 @@
+/.quarto/
+private
+private/*
+auto-generated/private
+env
+.vscode
+
+# Ignore Mac DS_Store files
+.DS_Store
+node_modules/
+.com.apple.timemachine.supported
+
+# linux backup files
+*~
+
+# markup
+/build/
+/production/
+.sass-cache
+node_modules
+*.map
+.tmp
+tmp
+
+# legacy ignorefiles from genomicc site
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
+node_modules
+package-lock.json
+/dist
+/.idea
+*.DS*
+
+/_*.local
+
+/env/
+/.venv/
+
+_site/
+.quarto/
+/brackets_files/
+temp.html
