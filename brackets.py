@@ -81,7 +81,9 @@ def extract_lines_by_person_with_headers(markdown_text):
 
 if __name__ == "__main__":
     #input_content = sys.stdin.read()
-    with open("test_input.qmd") as f:
+    with open("baillielab.md") as f:
         input_content = f.read()
     result = extract_lines_by_person_with_headers(input_content)
     print(result)
+
+

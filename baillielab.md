@@ -1,3 +1,7 @@
+---
+filters: [brackets.lua]
+---
+
 # Baillielab shared task list
 
 <!--
