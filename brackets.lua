@@ -48,23 +48,23 @@ local function process_block(block, header_stack, name_dict)
         if not name_dict[name] then
           name_dict[name] = {}
         end
-
-        -- Gather the header trail as plain text with ">" separator
-        local header_text = ""
-        for _, header in ipairs(header_stack) do
-          header_text = header_text .. string.rep(">", header.level) .. " " .. pandoc.utils.stringify(header) .. "\n"
-          if (name) == "Jane" then
-            print("Header Level: " .. header.level)
-            print("Header Text: " .. pandoc.utils.stringify(header))
+        
+        local output_text = ""
+        while #header_stack_copies[name] > 0 do
+          local header = table.remove(header_stack_copies[name], 1)
+          output_text = output_text .. string.rep(">", header.level) .. " " .. pandoc.utils.stringify(header) .. "\n"
+          if name == "Jane" then
+            print("Header: " .. pandoc.utils.stringify(header))
           end
         end
 
         -- Add the header trail and the paragraph to the name's list
-        if #header_text > 0 then
-          if not name_dict[name][header_text] then
-            name_dict[name][header_text] = {}
+        if #output_text > 0 then
+          if not name_dict[name][output_text] then
+            name_dict[name][output_text] = {}
           end
-          table.insert(name_dict[name][header_text], block)
+          table.insert(name_dict[name][output_text], block)
+          -- print("output_text: " .. pandoc.utils.stringify(name_dict[name][output_text]))
         end
       end
       ::continue::
@@ -87,6 +87,7 @@ local function process_block(block, header_stack, name_dict)
 end
 
 -- Function to extract lines by name and trace back headers
+header_stack_copies = {}
 local function extract_lines_by_name(blocks)
   local name_dict = {}
   local header_stack = {}
@@ -112,6 +113,15 @@ local function extract_lines_by_name(blocks)
   -- Collect all names for sorting
   for name in pairs(name_dict) do
     table.insert(sorted_names, name)
+    if not header_stack_copies[name] then
+      -- Create a copy of the current header_stack
+      local header_stack_copy = {}
+      for i, header in ipairs(header_stack) do
+        header_stack_copy[i] = header
+      end
+      -- Store the copy in the dictionary
+      header_stack_copies[name] = header_stack_copy
+    end
   end
 
   -- Sort names alphabetically
