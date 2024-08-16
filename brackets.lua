@@ -55,9 +55,7 @@ local function extract_lines_by_name(blocks)
   -- Create new blocks for each name
   local new_blocks = {}
   for name, sections in pairs(name_dict) do
-    -- Insert a header for the name
     table.insert(new_blocks, pandoc.Header(1, name))
-    -- Insert the associated headers as plain text and lines
     for header_text, lines in pairs(sections) do
       table.insert(new_blocks, pandoc.Plain{pandoc.Str(header_text)})
       for _, line in ipairs(lines) do
@@ -69,16 +67,12 @@ local function extract_lines_by_name(blocks)
   return new_blocks
 end
 
--- Main Pandoc function
 function Pandoc(doc)
   local processed_blocks = extract_lines_by_name(doc.blocks)
-  
-  -- Make sure editor exists in meta and is a table
   if not doc.meta.editor then
     doc.meta.editor = pandoc.MetaMap({})
   end
   doc.meta.title = pandoc.MetaString("People")
   doc.meta.editor["render-on-save"] = pandoc.MetaBool(true)
-  
   return pandoc.Pandoc(processed_blocks, doc.meta)
 end
