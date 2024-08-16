@@ -1,14 +1,14 @@
 # Test document
 
-# Arnold
+### Arnold
 
 > Header 1
 >> Used header 2
->>> Moo
+>>> Mong
 
 and they can be relied upon to appear correctly \[Arnold\]
 
-# Bob
+### Bob
 
 > Header 1
 >> Used header 2
@@ -16,7 +16,7 @@ and they can be relied upon to appear correctly \[Arnold\]
 
 And a third line with \[Tom, Harry, Bob\].
 
-# Dick
+### Dick
 
 > Header 1
 >> Used header 2
@@ -26,7 +26,7 @@ This is a sentence with \[Tom, Dick\].
 
 Another line with \[Dick, Harry\].
 
-# Dudo
+### Dudo
 
 > Header 1
 >> Used header 2
@@ -34,7 +34,7 @@ Another line with \[Dick, Harry\].
 
 What about this then \[Jemima, Dudo\]
 
-# Harry
+### Harry
 
 > Header 1
 >> Used header 2
@@ -44,7 +44,7 @@ Another line with \[Dick, Harry\].
 
 And a third line with \[Tom, Harry, Bob\].
 
-# Jane
+### Jane
 
 > Header 1
 >> Used header 2
@@ -54,7 +54,13 @@ And actually a fourth one, now added. \[Jane\]
 
 list items appear as seperate blocks \[Jane\]
 
-# Jemima
+> Header 1
+>> Used header 2
+>>> Mong
+
+this item appears under Mong \[Jane\]
+
+### Jemima
 
 > Header 1
 >> Used header 2
@@ -62,14 +68,14 @@ list items appear as seperate blocks \[Jane\]
 
 What about this then \[Jemima, Dudo\]
 
-# Josh
+### Josh
 
 > Header 1
 >> Used header 2
 
 ☒ the task is complete \[Josh\]
 
-# Tom
+### Tom
 
 > Header 1
 >> Used header 2

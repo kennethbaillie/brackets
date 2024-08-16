@@ -2,8 +2,8 @@
 title: "Test document"
 filters: [brackets.lua]
 format:
-  html:
-    output-file: test.html
+  md:
+    output-file: test.md
 ---
 
 # Header 1
@@ -21,8 +21,11 @@ format:
 - And a third line with [Tom, Harry, Bob].
 
 - And actually a fourth one, now added. [Jane]
+- list items appear as seperate blocks [Jane]
 
 What about this then [Jemima, Dudo]
 
-- list items appear as seperate blocks [Jane]
+### Mong
+
+- this item appears under Mong [Jane]
 - and they can be relied upon to appear correctly [Arnold]

@@ -53,6 +53,10 @@ local function process_block(block, header_stack, name_dict)
         local header_text = ""
         for _, header in ipairs(header_stack) do
           header_text = header_text .. string.rep(">", header.level) .. " " .. pandoc.utils.stringify(header) .. "\n"
+          if (name) == "Jane" then
+            print("Header Level: " .. header.level)
+            print("Header Text: " .. pandoc.utils.stringify(header))
+          end
         end
 
         -- Add the header trail and the paragraph to the name's list
