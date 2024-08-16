@@ -45,3 +45,5 @@ _site/
 temp.html
 
 /.luarc.json
+*.html
+*_files/
