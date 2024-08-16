@@ -59,14 +59,13 @@ def extract_lines_by_person_with_headers(markdown_text):
                             # Update the last header for the person
                             last_header_for_person[name] = current_header_tree
                             
-                            replaced_line = line.replace(f'[{bracket_content}]', ' '.join([f'[{n}]' for n in names]))
-                            if replaced_line.startswith("#"):
-                                while replaced_line.startswith("#"):
-                                    replaced_line = replaced_line[1:]
-                                replaced_line = "**"+replaced_line.strip()+"**  "
+                            if line.startswith("#"):
+                                while line.startswith("#"):
+                                    line = line[1:]
+                                line = "**"+line.strip()+"**  "
                             if header_to_add not in person_lines[name]:
                                 person_lines[name][header_to_add] = []
-                            person_lines[name][header_to_add].append(f"\n{replaced_line}")
+                            person_lines[name][header_to_add].append(f"\n{line}")
     
     result_lines = []
     for person, headers in person_lines.items():
@@ -80,9 +79,9 @@ def extract_lines_by_person_with_headers(markdown_text):
     return '\n'.join(result_lines).strip()
 
 if __name__ == "__main__":
-    #input_content = sys.stdin.read()
-    with open("baillielab.md") as f:
-        input_content = f.read()
+    input_content = sys.stdin.read()
+    #with open("baillielab.md") as f:
+    #    input_content = f.read()
     result = extract_lines_by_person_with_headers(input_content)
     print(result)
 
