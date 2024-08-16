@@ -26,15 +26,22 @@ local function process_block(block, header_stack, name_dict)
         if should_exclude(name) then
           goto continue
         end
+        print("Processing name:", name)
+        print("Current name_dict[name]:", name_dict[name])
+
+        if name_dict[name] == nil then
+            print("Initializing name_dict[name] for:", name)
+            name_dict[name] = {}
+        end
+
+        print("Current header_stack:", header_stack)
+
+        local entry = {
+            header_stack = header_stack or {},  -- Safeguard against nil header_stack
+            content = content or ""  -- Safeguard against nil content
+        }
+        table.insert(name_dict[name], entry)
       end
-      if name_dict[name] == nil then
-        name_dict[name] = {}
-      end
-      local entry = {
-        header = header_stack,
-        content = content
-      }
-      table.insert(name_dict[name], entry)
       ::continue:: 
     end
   elseif block.t == 'BulletList' or block.t == 'OrderedList' then
@@ -57,6 +64,7 @@ end
 local function extract_lines_by_name(blocks)
   local name_dict = {}
   local header_stack = {}
+  local prev_header_stack = {}
 
   for _, block in ipairs(blocks) do
     if block.t == 'Header' then
@@ -81,29 +89,28 @@ local function extract_lines_by_name(blocks)
     if not prev_header_stack[name] then
       prev_header_stack[name] = {}
     end
-    local sections = name_dict[name]
     table.insert(new_blocks, pandoc.Header(3, name))
-    for header_stack, lines in pairs(sections) do
+    for _, entry in ipairs(name_dict[name]) do
       local stored_header_stack = {}
-      for i, header in ipairs(header_stack) do
-        stored_header_stack[name][i] = header
+      for i, header in ipairs(entry.header_stack) do
+        stored_header_stack = header
       end
       local i = 1
-      while i <= #header_stack do
-        if prev_header_stack[name][i] and prev_header_stack[name][i] == pandoc.utils.stringify(header_stack[i]) then
-          table.remove(header_stack, i)
+      while i <= #entry.header_stack do
+        if prev_header_stack[name][i] and prev_header_stack[name][i] == pandoc.utils.stringify(entry.header_stack[i]) then
+          table.remove(entry.header_stack, i)
         else
           break
         end
       end
       prev_header_stack[name] = stored_header_stack
       local header_output = ""
-      for i, header in ipairs(header_stack) do
+      for i, header in ipairs(entry.header_stack) do
         header_text = header_output .. string.rep(">", header.level) .. " " .. pandoc.utils.stringify(header) .. "\n"
       end
       table.insert(new_blocks, pandoc.RawBlock('markdown', header_text))
       table.insert(new_blocks, pandoc.Para {})
-      for _, line in ipairs(lines) do
+      for _, line in ipairs(entry.content) do
         table.insert(new_blocks, line)
       end
     end

@@ -3,90 +3,48 @@
 
 ###  Bob
 
-> Header 1
->> Used header 2
->>> Moo
-
-And a third line with \[Tom, Harry, Bob\].
+>>> Mong
 
 ###  Dick
 
-> Header 1
->> Used header 2
->>> Moo
-
-This is a sentence with \[Tom, Dick\].
+>>> Mong
 
 ###  Dudo
 
-> Header 1
->> Used header 2
->>> Moo
-
-What about this then, huh? \[Jemima, Dudo\]
+>>> Mong
 
 ###  Harry
 
-> Header 1
->> Used header 2
->>> Moo
+>>> Mong
 
-Another line with \[Dick, Harry\].
-
-And a third line with \[Tom, Harry, Bob\].
+>>> Mong
 
 ### Arnold
 
-> Header 1
->> Used header 2
 >>> Mong
-
-and they can be relied upon to appear correctly \[Arnold\]
 
 ### Dick
 
-> Header 1
->> Used header 2
->>> Moo
-
-Another line with \[Dick, Harry\].
+>>> Mong
 
 ### Jane
 
-> Header 1
->> Used header 2
 >>> Mong
 
-this item appears under Mong \[Jane\]
-> Header 1
->> Used header 2
->>> Moo
+>>> Mong
 
-And actually a fourth one, now added. \[Jane\]
-
-list items appear as seperate blocks \[Jane\]
+>>> Mong
 
 ### Jemima
 
-> Header 1
->> Used header 2
->>> Moo
-
-What about this then, huh? \[Jemima, Dudo\]
+>>> Mong
 
 ### Josh
 
-> Header 1
->> Used header 2
-
-☒ the task is complete \[Josh\]
+>>> Mong
 
 ### Tom
 
-> Header 1
->> Used header 2
->>> Moo
+>>> Mong
 
-This is a sentence with \[Tom, Dick\].
-
-And a third line with \[Tom, Harry, Bob\].
+>>> Mong
