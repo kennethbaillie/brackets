@@ -24,8 +24,6 @@ And a third line with \[Tom, Harry, Bob\].
 
 This is a sentence with \[Tom, Dick\].
 
-Another line with \[Dick, Harry\].
-
 ### Dudo
 
 > Header 1
@@ -42,8 +40,6 @@ What about this then \[Jemima, Dudo\]
 
 Another line with \[Dick, Harry\].
 
-And a third line with \[Tom, Harry, Bob\].
-
 ### Jane
 
 > Header 1
@@ -51,14 +47,6 @@ And a third line with \[Tom, Harry, Bob\].
 >>> Moo
 
 And actually a fourth one, now added. \[Jane\]
-
-list items appear as seperate blocks \[Jane\]
-
-> Header 1
->> Used header 2
->>> Mong
-
-this item appears under Mong \[Jane\]
 
 ### Jemima
 
@@ -82,5 +70,3 @@ What about this then \[Jemima, Dudo\]
 >>> Moo
 
 This is a sentence with \[Tom, Dick\].
-
-And a third line with \[Tom, Harry, Bob\].

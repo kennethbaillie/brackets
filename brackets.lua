@@ -19,6 +19,7 @@ local function should_ignore(bracketed_content)
   return false
 end
 
+header_stack_copies = {}
 -- Function to process a block and extract names
 local function process_block(block, header_stack, name_dict)
   if block.t == 'Para' or block.t == 'Plain' then
@@ -49,6 +50,16 @@ local function process_block(block, header_stack, name_dict)
           name_dict[name] = {}
         end
         
+        if not header_stack_copies[name] then
+          -- Create a copy of the current header_stack
+          local header_stack_copy = {}
+          for i, header in ipairs(header_stack) do
+            header_stack_copy[i] = header
+          end
+          -- Store the copy in the dictionary
+          header_stack_copies[name] = header_stack_copy
+        end
+
         local output_text = ""
         while #header_stack_copies[name] > 0 do
           local header = table.remove(header_stack_copies[name], 1)
@@ -87,7 +98,6 @@ local function process_block(block, header_stack, name_dict)
 end
 
 -- Function to extract lines by name and trace back headers
-header_stack_copies = {}
 local function extract_lines_by_name(blocks)
   local name_dict = {}
   local header_stack = {}
@@ -113,15 +123,6 @@ local function extract_lines_by_name(blocks)
   -- Collect all names for sorting
   for name in pairs(name_dict) do
     table.insert(sorted_names, name)
-    if not header_stack_copies[name] then
-      -- Create a copy of the current header_stack
-      local header_stack_copy = {}
-      for i, header in ipairs(header_stack) do
-        header_stack_copy[i] = header
-      end
-      -- Store the copy in the dictionary
-      header_stack_copies[name] = header_stack_copy
-    end
   end
 
   -- Sort names alphabetically
