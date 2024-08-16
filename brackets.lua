@@ -15,63 +15,27 @@ local function should_ignore(bracketed_content)
   return false
 end
 
-prev_header_stack = {}
 local function process_block(block, header_stack, name_dict)
   if block.t == 'Para' or block.t == 'Plain' then
     local content = pandoc.utils.stringify(block)
-
     for bracketed_content in content:gmatch('%[(.-)%]') do
       if should_ignore(bracketed_content) then
         goto continue
       end
-
-      local names = {}
       for name in bracketed_content:gmatch('[^,]+') do
-        if not should_exclude(name) then
-          table.insert(names, name)
+        if should_exclude(name) then
+          goto continue
         end
       end
-      table.sort(names)
-
-      for _, name in ipairs(names) do
-        if not name_dict[name] then
-          name_dict[name] = {}
-        end
-
-        if not prev_header_stack[name] then
-          prev_header_stack[name] = {}
-        end
-        
-        local stored_header_stack = {}
-        for i, header in ipairs(header_stack) do
-          stored_header_stack[i] = header
-        end
-
-        local i = 1
-        while i <= #header_stack do
-          if prev_header_stack[name][i] and prev_header_stack[name][i] == pandoc.utils.stringify(header_stack[i]) then
-            table.remove(header_stack, i)
-          else
-            break
-          end
-        end
-        prev_header_stack[name] = stored_header_stack
-
-        local output_text = ""
-        for i, header in ipairs(header_stack) do
-          print("Index: " .. i)
-          print("Header: " .. pandoc.utils.stringify(header))
-          print("Header level: " .. pandoc.utils.stringify(header.level))
-          output_text = output_text .. string.rep(">", header.level) .. " " .. pandoc.utils.stringify(header) .. "\n"
-        end
-        if #output_text > 0 then
-          if not name_dict[name][output_text] then
-            name_dict[name][output_text] = {}
-          end
-          table.insert(name_dict[name][output_text], block)
-        end
+      if name_dict[name] == nil then
+        name_dict[name] = {}
       end
-      ::continue::
+      local entry = {
+        header = header_stack,
+        content = content
+      }
+      table.insert(name_dict[name], entry)
+      ::continue:: 
     end
   elseif block.t == 'BulletList' or block.t == 'OrderedList' then
     for _, item in ipairs(block.content) do
@@ -111,19 +75,34 @@ local function extract_lines_by_name(blocks)
   for name in pairs(name_dict) do
     table.insert(sorted_names, name)
   end
-
   table.sort(sorted_names)
 
   for _, name in ipairs(sorted_names) do
+    if not prev_header_stack[name] then
+      prev_header_stack[name] = {}
+    end
     local sections = name_dict[name]
     table.insert(new_blocks, pandoc.Header(3, name))
-    local reported_headers = {}
-    for header_text, lines in pairs(sections) do
-      if not reported_headers[header_text] then
-        table.insert(new_blocks, pandoc.RawBlock('markdown', header_text))
-        table.insert(new_blocks, pandoc.Para {}) -- End the paragraph after the header
-        reported_headers[header_text] = true
+    for header_stack, lines in pairs(sections) do
+      local stored_header_stack = {}
+      for i, header in ipairs(header_stack) do
+        stored_header_stack[name][i] = header
       end
+      local i = 1
+      while i <= #header_stack do
+        if prev_header_stack[name][i] and prev_header_stack[name][i] == pandoc.utils.stringify(header_stack[i]) then
+          table.remove(header_stack, i)
+        else
+          break
+        end
+      end
+      prev_header_stack[name] = stored_header_stack
+      local header_output = ""
+      for i, header in ipairs(header_stack) do
+        header_text = header_output .. string.rep(">", header.level) .. " " .. pandoc.utils.stringify(header) .. "\n"
+      end
+      table.insert(new_blocks, pandoc.RawBlock('markdown', header_text))
+      table.insert(new_blocks, pandoc.Para {})
       for _, line in ipairs(lines) do
         table.insert(new_blocks, line)
       end
