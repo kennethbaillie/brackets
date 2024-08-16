@@ -121,6 +121,7 @@ local function extract_lines_by_name(blocks)
     for header_text, lines in pairs(sections) do
       if not reported_headers[header_text] then
         table.insert(new_blocks, pandoc.Plain { pandoc.Str(header_text) })
+        table.insert(new_blocks, pandoc.Para {}) -- End the paragraph after the header
         reported_headers[header_text] = true
       end
       for _, line in ipairs(lines) do
