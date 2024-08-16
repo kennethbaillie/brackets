@@ -1,23 +1,21 @@
 {
-	"name": "Quarto Development Container",
-	"image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04",
-	"customizations": {
-	  "vscode": {
-		"extensions": [
-		  "quarto.quarto"
-		],
-		"settings": {
-		  "terminal.integrated.defaultProfile.linux": "bash"
-		}
-	  }
-	},
-	"features": {
+    "name": "Quarto Development Container",
+    "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "quarto.quarto",
+          "ms-vscode.sublime-keybindings"
+        ],
+        "settings": {
+          "terminal.integrated.defaultProfile.linux": "bash"
+        }
+      }
+    },
+    "features": {
       "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {},
-	  "ghcr.io/devcontainers/features/common-utils:2": {},
-	  "ghcr.io/devcontainers/features/node:1": {
-		"version": "lts"
-	  }
-	},
-	"postCreateCommand": "sudo apt-get update && sudo apt-get install -y wget pandoc && wget https://quarto.org/download/latest/quarto-linux-amd64.deb && sudo dpkg -i quarto-linux-amd64.deb && rm quarto-linux-amd64.deb"
+      "ghcr.io/devcontainers/features/common-utils:2": {}
+    },
+    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y pandoc"
   }
   
