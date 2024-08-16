@@ -1,14 +1,10 @@
 local pandoc = require 'pandoc'
 
--- List of names to exclude
-local exclude_names = { ["doi"] = true, ["pmid"] = true, ["x"] = true, ["X"] = true, ["[ ]"] = true }
-
--- Function to check if a name should be excluded
+local exclude_names = { ["x"] = true, ["X"] = true, ["[ ]"] = true }
 local function should_exclude(name)
   return exclude_names[name] ~= nil
 end
 
--- Function to check if any comma-separated elements begin with "DOI" or "PMID"
 local function should_ignore(bracketed_content)
   for name in bracketed_content:gmatch('[^,]+') do
     name = name:match('^%s*(.-)%s*$') -- trim whitespace
@@ -20,43 +16,33 @@ local function should_ignore(bracketed_content)
 end
 
 header_stack_copies = {}
--- Function to process a block and extract names
 local function process_block(block, header_stack, name_dict)
   if block.t == 'Para' or block.t == 'Plain' then
-    -- Convert the block to plain text
     local content = pandoc.utils.stringify(block)
 
-    -- Find all names in square brackets
     for bracketed_content in content:gmatch('%[(.-)%]') do
-      -- Ignore if any comma-separated elements begin with "DOI" or "PMID"
       if should_ignore(bracketed_content) then
         goto continue
       end
 
-      -- Split the bracketed content into individual names and sort them
       local names = {}
       for name in bracketed_content:gmatch('[^,]+') do
-        name = name:match('^%s*(.-)%s*$') -- trim whitespace
         if not should_exclude(name) then
           table.insert(names, name)
         end
       end
       table.sort(names)
 
-      -- Process each sorted name
       for _, name in ipairs(names) do
-        -- Ensure the name has an entry in the name_dict
         if not name_dict[name] then
           name_dict[name] = {}
         end
         
         if not header_stack_copies[name] then
-          -- Create a copy of the current header_stack
           local header_stack_copy = {}
           for i, header in ipairs(header_stack) do
             header_stack_copy[i] = header
           end
-          -- Store the copy in the dictionary
           header_stack_copies[name] = header_stack_copy
         end
 
@@ -69,13 +55,11 @@ local function process_block(block, header_stack, name_dict)
           end
         end
 
-        -- Add the header trail and the paragraph to the name's list
         if #output_text > 0 then
           if not name_dict[name][output_text] then
             name_dict[name][output_text] = {}
           end
           table.insert(name_dict[name][output_text], block)
-          -- print("output_text: " .. pandoc.utils.stringify(name_dict[name][output_text]))
         end
       end
       ::continue::
@@ -97,38 +81,30 @@ local function process_block(block, header_stack, name_dict)
   end
 end
 
--- Function to extract lines by name and trace back headers
 local function extract_lines_by_name(blocks)
   local name_dict = {}
   local header_stack = {}
 
-  -- Iterate through each block in the document
   for _, block in ipairs(blocks) do
     if block.t == 'Header' then
-      -- Pop headers from the stack if the new header is of the same or higher level
       while #header_stack > 0 and header_stack[#header_stack].level >= block.level do
         table.remove(header_stack)
       end
-      -- Push the current header onto the stack
       table.insert(header_stack, block)
     else
       process_block(block, header_stack, name_dict)
     end
   end
 
-  -- Create new blocks for each name
   local new_blocks = {}
   local sorted_names = {}
 
-  -- Collect all names for sorting
   for name in pairs(name_dict) do
     table.insert(sorted_names, name)
   end
 
-  -- Sort names alphabetically
   table.sort(sorted_names)
 
-  -- Create blocks for each sorted name
   for _, name in ipairs(sorted_names) do
     local sections = name_dict[name]
     table.insert(new_blocks, pandoc.Header(3, name))
