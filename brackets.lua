@@ -71,6 +71,14 @@ end
 
 -- Main Pandoc function
 function Pandoc(doc)
-  local new_blocks = extract_lines_by_name(doc.blocks)
-  return pandoc.Pandoc(new_blocks, doc.meta)
+  local processed_blocks = extract_lines_by_name(doc.blocks)
+  
+  -- Make sure editor exists in meta and is a table
+  if not doc.meta.editor then
+    doc.meta.editor = pandoc.MetaMap({})
+  end
+  doc.meta.title = pandoc.MetaString("People")
+  doc.meta.editor["render-on-save"] = pandoc.MetaBool(true)
+  
+  return pandoc.Pandoc(processed_blocks, doc.meta)
 end

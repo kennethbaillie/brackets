@@ -1,12 +1,13 @@
 ---
 title: "Test document"
-format: html
-filter: [brackets.lua]
+filters: [brackets.lua]
 ---
 
-# Gen
+# Header 1
 
-## Sparkt
+## Sparky header 2
+
+## Used header 2
 
 - [x] the task is complete [Josh]
 
