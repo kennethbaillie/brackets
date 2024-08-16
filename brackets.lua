@@ -15,7 +15,7 @@ local function should_ignore(bracketed_content)
   return false
 end
 
-header_stack_copies = {}
+prev_header_stack = {}
 local function process_block(block, header_stack, name_dict)
   if block.t == 'Para' or block.t == 'Plain' then
     local content = pandoc.utils.stringify(block)
@@ -37,24 +37,33 @@ local function process_block(block, header_stack, name_dict)
         if not name_dict[name] then
           name_dict[name] = {}
         end
-        
-        if not header_stack_copies[name] then
-          local header_stack_copy = {}
-          for i, header in ipairs(header_stack) do
-            header_stack_copy[i] = header
-          end
-          header_stack_copies[name] = header_stack_copy
+
+        if not prev_header_stack[name] then
+          prev_header_stack[name] = {}
         end
+        
+        local stored_header_stack = {}
+        for i, header in ipairs(header_stack) do
+          stored_header_stack[i] = header
+        end
+
+        local i = 1
+        while i <= #header_stack do
+          if prev_header_stack[name][i] and prev_header_stack[name][i] == pandoc.utils.stringify(header_stack[i]) then
+            table.remove(header_stack, i)
+          else
+            break
+          end
+        end
+        prev_header_stack[name] = stored_header_stack
 
         local output_text = ""
-        while #header_stack_copies[name] > 0 do
-          local header = table.remove(header_stack_copies[name], 1)
+        for i, header in ipairs(header_stack) do
+          print("Index: " .. i)
+          print("Header: " .. pandoc.utils.stringify(header))
+          print("Header level: " .. pandoc.utils.stringify(header.level))
           output_text = output_text .. string.rep(">", header.level) .. " " .. pandoc.utils.stringify(header) .. "\n"
-          if name == "Jane" then
-            print("Header: " .. pandoc.utils.stringify(header))
-          end
         end
-
         if #output_text > 0 then
           if not name_dict[name][output_text] then
             name_dict[name][output_text] = {}

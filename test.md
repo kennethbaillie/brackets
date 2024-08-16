@@ -23,7 +23,7 @@ This is a sentence with \[Tom, Dick\].
 >> Used header 2
 >>> Moo
 
-What about this then \[Jemima, Dudo\]
+What about this then, huh? \[Jemima, Dudo\]
 
 ###  Harry
 
@@ -32,6 +32,8 @@ What about this then \[Jemima, Dudo\]
 >>> Moo
 
 Another line with \[Dick, Harry\].
+
+And a third line with \[Tom, Harry, Bob\].
 
 ### Arnold
 
@@ -53,9 +55,16 @@ Another line with \[Dick, Harry\].
 
 > Header 1
 >> Used header 2
+>>> Mong
+
+this item appears under Mong \[Jane\]
+> Header 1
+>> Used header 2
 >>> Moo
 
 And actually a fourth one, now added. \[Jane\]
+
+list items appear as seperate blocks \[Jane\]
 
 ### Jemima
 
@@ -63,7 +72,7 @@ And actually a fourth one, now added. \[Jane\]
 >> Used header 2
 >>> Moo
 
-What about this then \[Jemima, Dudo\]
+What about this then, huh? \[Jemima, Dudo\]
 
 ### Josh
 
@@ -79,3 +88,5 @@ What about this then \[Jemima, Dudo\]
 >>> Moo
 
 This is a sentence with \[Tom, Dick\].
+
+And a third line with \[Tom, Harry, Bob\].
