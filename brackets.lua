@@ -2,7 +2,7 @@ local pipe = pandoc.pipe
 
 function pull_names(content)
   local py_script = "brackets.py"
-  local result = pipe('python', {py_script}, content)
+  local result = pipe('python3', {py_script}, content)
   if result == "" then
     return {}
   end
