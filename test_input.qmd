@@ -1,6 +1,8 @@
 ---
 title: "Test document"
 filters: [brackets.lua]
+format:
+  html: default
 ---
 
 # Header 1
@@ -13,13 +15,13 @@ filters: [brackets.lua]
 
 ### Moo
 
-This is a sentence with [Tom, Dick].
-Another line with [Dick, Harry].
-And a third line with [Tom, Harry, Bob].
+- This is a sentence with [Tom, Dick].
+- Another line with [Dick, Harry].
+- And a third line with [Tom, Harry, Bob].
 
-And actually a fourth one, now added. [Jane]
+- And actually a fourth one, now added. [Jane]
+
 What about this then [Jemima, Dudo]
-
 
 - list items appear as seperate blocks [Jane]
 - and they can be relied upon to appear correctly [Arnold]
