@@ -116,7 +116,7 @@ local function extract_lines_by_name(blocks)
   -- Create blocks for each sorted name
   for _, name in ipairs(sorted_names) do
     local sections = name_dict[name]
-    table.insert(new_blocks, pandoc.Header(1, name))
+    table.insert(new_blocks, pandoc.Header(3, name))
     local reported_headers = {}
     for header_text, lines in pairs(sections) do
       if not reported_headers[header_text] then

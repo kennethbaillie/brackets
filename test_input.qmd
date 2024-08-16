@@ -2,8 +2,8 @@
 title: "Test document"
 filters: [brackets.lua]
 format:
-  md:
-    output-file: test.md
+  html:
+    output-file: test.html
 ---
 
 # Header 1
