@@ -43,3 +43,5 @@ _site/
 .quarto/
 /brackets_files/
 temp.html
+
+/.luarc.json
