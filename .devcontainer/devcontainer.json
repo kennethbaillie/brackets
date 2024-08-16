@@ -10,11 +10,14 @@
         },
         "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
             "packages": "github::rstudio/renv,tidyverse,here,httpgd"
-        },
+        }
     },
     "customizations": {
         "vscode": {
-            "extensions": ["mechatroner.rainbow-csv"]
+            "extensions": [
+                "mechatroner.rainbow-csv",
+                "quarto.quarto"
+            ]
         },
         "codespaces": {
             "openFiles": ["README.md"]
