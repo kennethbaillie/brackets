@@ -1,11 +1,14 @@
 ---
-title: "Your Document Title"
+title: "Test document"
 format: html
+filter: [brackets.lua]
 ---
 
 # Gen
 
 ## Sparkt
+
+- [x] the task is complete [Josh]
 
 ### Moo
 
@@ -17,4 +20,5 @@ And actually a fourth one, now added. [Jane]
 What about this then [Jemima, Dudo]
 
 
-Dudo is not going to do this. But we can sack him.
+- list items appear as seperate blocks [Jane]
+- and they can be relied upon to appear correctly [Arnold]
