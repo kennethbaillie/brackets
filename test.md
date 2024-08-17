@@ -25,7 +25,7 @@
 
 -   This is a sentence with \[Tom, Dick\].
 
->> An actual list of tasks [Jemima]
+>>> Moo comes first
 
 -   Another line with \[Dick, Harry\].
 
@@ -45,7 +45,7 @@ What about this then, huh? \[Jemima, Dudo\]
 
 -   Another line with \[Dick, Harry\].
 
->> An actual list of tasks [Jemima]
+>>> Moo comes first
 
 -   And a third line with \[Tom, Harry, Bob\].
 
@@ -57,11 +57,11 @@ What about this then, huh? \[Jemima, Dudo\]
 
 -   And actually a fourth one, now added. \[Jane\]
 
->> An actual list of tasks [Jemima]
+>>> Moo comes first
 
 -   list items appear as seperate blocks \[Jane\]
 
->> An actual list of tasks [Jemima]
+>>> Mong comes second
 
 -   this item appears under Mong \[Jane\]
 
@@ -71,6 +71,7 @@ What about this then, huh? \[Jemima, Dudo\]
 >> An actual list of tasks [Jemima]
 
 >> An actual list of tasks [Jemima]
+>>> Moo comes first
 
 What about this then, huh? \[Jemima, Dudo\]
 
@@ -91,6 +92,6 @@ What about this then, huh? \[Jemima, Dudo\]
 
 -   This is a sentence with \[Tom, Dick\].
 
->> An actual list of tasks [Jemima]
+>>> Moo comes first
 
 -   And a third line with \[Tom, Harry, Bob\].
