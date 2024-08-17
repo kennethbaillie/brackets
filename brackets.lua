@@ -1,4 +1,5 @@
 local pandoc = require 'pandoc'
+local order_counter
 
 ---------
 local function print_table(t, indent)
@@ -31,7 +32,15 @@ local function should_ignore(bracketed_content)
   return false
 end
 
+-- Global order counter
+local order_counter = 0
+
+-- Updated process_block function
 local function process_block(block, header_stack, name_dict)
+  order_counter = order_counter + 1
+  print (order_counter)
+  print ("Header stack")
+  print_table(header_stack)
   if block.t == 'Para' or block.t == 'Plain' then
     local content = pandoc.utils.stringify(block)
     for bracketed_content in content:gmatch('%[(.-)%]') do
@@ -39,6 +48,7 @@ local function process_block(block, header_stack, name_dict)
         goto continue
       end
       for name in bracketed_content:gmatch('[^,]+') do
+        name = name:match('^%s*(.-)%s*$') -- trim whitespace
         if should_exclude(name) then
           goto continue
         end
@@ -46,9 +56,9 @@ local function process_block(block, header_stack, name_dict)
             name_dict[name] = {}
         end
         local entry = {
-            header_stack = header_stack or {},  
-            content = content or "",
-            order = #name_dict[name] + 1  
+            header_stack = header_stack,
+            content = content,
+            order = order_counter
         }
         table.insert(name_dict[name], entry)
       end
@@ -71,10 +81,13 @@ local function process_block(block, header_stack, name_dict)
   end
 end
 
+
 local function extract_lines_by_name(blocks)
   local name_dict = {}
   local header_stack = {}
-  local prev_header_stack = {}
+  local order_counter = 0
+
+  -- Process blocks and build name_dict
   for _, block in ipairs(blocks) do
     if block.t == 'Header' then
       while #header_stack > 0 and header_stack[#header_stack].level >= block.level do
@@ -85,25 +98,36 @@ local function extract_lines_by_name(blocks)
       process_block(block, header_stack, name_dict)
     end
   end
-  ----------
-  print_table(name_dict)
-  ----------
-  local new_blocks = {}
+
+  -- Sort names alphabetically
   local sorted_names = {}
   for name in pairs(name_dict) do
     table.insert(sorted_names, name)
   end
   table.sort(sorted_names)
+
+  local new_blocks = {}
+  local prev_header_stack = {}
+
+  -- Iterate through sorted names
   for _, name in ipairs(sorted_names) do
     if not prev_header_stack[name] then
       prev_header_stack[name] = {}
     end
     table.insert(new_blocks, pandoc.Header(3, name))
-    for _, entry in ipairs(name_dict[name]) do
+
+    -- Sort entries for this name by their order
+    local entries = name_dict[name]
+    table.sort(entries, function(a, b) return a.order > b.order end)
+
+    -- Process entries for this name
+    for _, entry in ipairs(entries) do
+      print_table(entry)
       local stored_header_stack = {}
       for i, header in ipairs(entry.header_stack) do
-        stored_header_stack = header
+        stored_header_stack[i] = pandoc.utils.stringify(header)
       end
+
       local i = 1
       while i <= #entry.header_stack do
         if prev_header_stack[name][i] and prev_header_stack[name][i] == pandoc.utils.stringify(entry.header_stack[i]) then
@@ -113,19 +137,22 @@ local function extract_lines_by_name(blocks)
         end
       end
       prev_header_stack[name] = stored_header_stack
-      local header_output = ""
+
+      local header_text = ""
       for i, header in ipairs(entry.header_stack) do
-        header_text = header_output .. string.rep(">", header.level) .. " " .. pandoc.utils.stringify(header) .. "\n"
+        header_text = header_text .. string.rep(">", header.level) .. " " .. pandoc.utils.stringify(header) .. "\n"
       end
-      table.insert(new_blocks, pandoc.RawBlock('markdown', header_text))
-      table.insert(new_blocks, pandoc.Para {})
-      for _, line in ipairs(entry.content) do
-        table.insert(new_blocks, line)
+      
+      if header_text ~= "" then
+        table.insert(new_blocks, pandoc.RawBlock('markdown', header_text))
       end
+      table.insert(new_blocks, pandoc.Para(pandoc.Str(entry.content)))
     end
   end
+
   return new_blocks
 end
+
 
 function Pandoc(doc)
   local processed_blocks = extract_lines_by_name(doc.blocks)
