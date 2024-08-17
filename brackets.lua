@@ -1,5 +1,4 @@
 local pandoc = require 'pandoc'
-local order_counter
 
 ---------
 local function print_table(t, indent)
@@ -18,6 +17,7 @@ end
 ---------
 
 
+-- Functions for excluding and ignoring names
 local exclude_names = { ["x"] = true, ["X"] = true, ["[ ]"] = true }
 local function should_exclude(name)
   return exclude_names[name] ~= nil
@@ -33,6 +33,7 @@ local function should_ignore(bracketed_content)
   return false
 end
 
+-- Function to create a shallow copy of a table
 local function shallow_copy(t)
     local t_copy = {}
     for k, v in pairs(t) do
@@ -44,69 +45,57 @@ end
 -- Global order counter
 local order_counter = 0
 
--- Updated process_block function
-local function process_block(block, header_st, name_dict)
+-- Function to process each line
+local function process_line(line, header_stack, name_dict)
   order_counter = order_counter + 1
-  print (order_counter)
-  print ("Header stack submitted to process_block:")
-  print_table(header_st)
-  if block.t == 'Para' or block.t == 'Plain' then
-    local content = pandoc.utils.stringify(block)
-    print ("block:")
-    print (content)
-    for bracketed_content in content:gmatch('%[(.-)%]') do
-      if should_ignore(bracketed_content) then
+  print(order_counter)
+  print("Header stack submitted to process_line:")
+  print_table(header_stack)
+
+  -- Check if line contains bracketed content
+  for bracketed_content in line:gmatch('%[(.-)%]') do
+    if should_ignore(bracketed_content) then
+      goto continue
+    end
+    for name in bracketed_content:gmatch('[^,]+') do
+      name = name:match('^%s*(.-)%s*$') -- trim whitespace
+      if should_exclude(name) then
         goto continue
       end
-      for name in bracketed_content:gmatch('[^,]+') do
-        name = name:match('^%s*(.-)%s*$') -- trim whitespace
-        if should_exclude(name) then
-          goto continue
-        end
-        if name_dict[name] == nil then
-            name_dict[name] = {}
-        end
-        local entry = {
-            headers = shallow_copy(header_st),
-            content = content,
-            order = order_counter
-        }
-        table.insert(name_dict[name], entry)
+      if name_dict[name] == nil then
+          name_dict[name] = {}
       end
-      ::continue:: 
+      local entry = {
+          headers = shallow_copy(header_stack),
+          content = line,
+          order = order_counter
+      }
+      table.insert(name_dict[name], entry)
     end
-  elseif block.t == 'BulletList' or block.t == 'OrderedList' then
-    for _, item in ipairs(block.content) do
-      for _, subblock in ipairs(item) do
-        process_block(subblock, header_st, name_dict)
-      end
-    end
-  elseif block.t == 'DefinitionList' then
-    for _, item in ipairs(block.content) do
-      for _, subblock in ipairs(item[2]) do
-        for _, subsubblock in ipairs(subblock) do
-          process_block(subsubblock, header_st, name_dict)
-        end
-      end
-    end
+    ::continue:: 
   end
 end
 
-
-local function extract_lines_by_name(blocks)
+-- Function to process the entire document
+function Pandoc(doc)
+  local plain_text = pandoc.write(doc, 'plain')
   local name_dict = {}
   local header_stack = {}
-  local order_counter = 0
-
-  -- Process blocks and build name_dict
-  for _, block in ipairs(blocks) do
-    if block.t == 'Header' then
-      while #header_stack > 0 and header_stack[#header_stack].level >= block.level do
+  
+  -- Split plain text into lines and process each line
+  for line in plain_text:gmatch("[^\r\n]+") do
+    -- Simulate header stack handling
+    if line:match("^#+") then
+      print ("header found:")
+      print (line)
+      local level = #line:match("^#+")  -- Count the number of leading '#' to determine header level
+      while #header_stack > 0 and header_stack[#header_stack].level >= level do
         table.remove(header_stack)
       end
-      table.insert(header_stack, block)
+      table.insert(header_stack, {level = level, content = line})
     else
-      process_block(block, header_stack, name_dict)
+      -- Process non-header lines
+      process_line(line, header_stack, name_dict)
     end
   end
 
@@ -133,16 +122,14 @@ local function extract_lines_by_name(blocks)
 
     -- Process entries for this name
     for _, entry in ipairs(entries) do
-      print ("\n output processing:")
-      print_table(entry)
       local stored_header_stack = {}
       for i, header in ipairs(entry.headers) do
-        stored_header_stack[i] = pandoc.utils.stringify(header)
+        stored_header_stack[i] = header.content
       end
 
       local i = 1
       while i <= #entry.headers do
-        if prev_header_stack[name][i] and prev_header_stack[name][i] == pandoc.utils.stringify(entry.headers[i]) then
+        if prev_header_stack[name][i] and prev_header_stack[name][i] == entry.headers[i].content then
           table.remove(entry.headers, i)
         else
           break
@@ -152,7 +139,7 @@ local function extract_lines_by_name(blocks)
 
       local header_text = ""
       for i, header in ipairs(entry.headers) do
-        header_text = header_text .. string.rep(">", header.level) .. " " .. pandoc.utils.stringify(header) .. "\n"
+        header_text = header_text .. string.rep(">", header.level) .. " " .. header.content .. "\n"
       end
       
       if header_text ~= "" then
@@ -162,11 +149,5 @@ local function extract_lines_by_name(blocks)
     end
   end
 
-  return new_blocks
-end
-
-
-function Pandoc(doc)
-  local processed_blocks = extract_lines_by_name(doc.blocks)
-  return pandoc.Pandoc(processed_blocks, doc.meta)
+  return pandoc.Pandoc(new_blocks, doc.meta)
 end
