@@ -23,12 +23,12 @@
 >> An actual list of tasks [Jemima]
 >>> Moo comes first
 
--   Another line with \[Dick, Harry\].
+-   This is a sentence with \[Tom, Dick\].
 
 >> An actual list of tasks [Jemima]
 >>> Moo comes first
 
--   This is a sentence with \[Tom, Dick\].
+-   Another line with \[Dick, Harry\].
 
 ### Dudo
 
@@ -44,20 +44,20 @@ What about this then, huh? \[Jemima, Dudo\]
 >> An actual list of tasks [Jemima]
 >>> Moo comes first
 
--   And a third line with \[Tom, Harry, Bob\].
+-   Another line with \[Dick, Harry\].
 
 >> An actual list of tasks [Jemima]
 >>> Moo comes first
 
--   Another line with \[Dick, Harry\].
+-   And a third line with \[Tom, Harry, Bob\].
 
 ### Jane
 
 > The big Header at the top
 >> An actual list of tasks [Jemima]
->>> Mong comes second
+>>> Moo comes first
 
--   this item appears under Mong \[Jane\]
+-   And actually a fourth one, now added. \[Jane\]
 
 >> An actual list of tasks [Jemima]
 >>> Moo comes first
@@ -65,28 +65,28 @@ What about this then, huh? \[Jemima, Dudo\]
 -   list items appear as seperate blocks \[Jane\]
 
 >> An actual list of tasks [Jemima]
->>> Moo comes first
+>>> Mong comes second
 
--   And actually a fourth one, now added. \[Jane\]
+-   this item appears under Mong \[Jane\]
 
 ### Jemima
 
 > The big Header at the top
 >> An actual list of tasks [Jemima]
+
+>> An actual list of tasks [Jemima]
 >>> Moo comes first
 
 What about this then, huh? \[Jemima, Dudo\]
 
->> An actual list of tasks [Jemima]
-
 ### Josh
 
 > The big Header at the top
+>> Sparky header which doesn’t have any content [Josh]
+
 >> An actual list of tasks [Jemima]
 
 -   ☒ the task is complete \[Josh\]
-
->> Sparky header which doesn’t have any content [Josh]
 
 ### Tom
 
@@ -94,9 +94,9 @@ What about this then, huh? \[Jemima, Dudo\]
 >> An actual list of tasks [Jemima]
 >>> Moo comes first
 
--   And a third line with \[Tom, Harry, Bob\].
+-   This is a sentence with \[Tom, Dick\].
 
 >> An actual list of tasks [Jemima]
 >>> Moo comes first
 
--   This is a sentence with \[Tom, Dick\].
+-   And a third line with \[Tom, Harry, Bob\].

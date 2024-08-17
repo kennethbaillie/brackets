@@ -86,9 +86,6 @@ function Pandoc(doc)
       local level = block.level
       local content = pandoc.utils.stringify(block)
 
-      print("Header found:")
-      print(content)
-
       -- Adjust the header stack based on the level
       while #header_stack > 0 and header_stack[#header_stack].level >= level do
         table.remove(header_stack)
@@ -127,7 +124,7 @@ function Pandoc(doc)
 
     -- Sort entries for this name by their order
     local entries = name_dict[name]
-    table.sort(entries, function(a, b) return a.order > b.order end)
+    table.sort(entries, function(a, b) return a.order < b.order end)
 
     -- Process entries for this name
     for _, entry in ipairs(entries) do
