@@ -1,5 +1,21 @@
 local pandoc = require 'pandoc'
 
+---------
+local function print_table(t, indent)
+    indent = indent or 0
+    local indent_str = string.rep("  ", indent)
+
+    for key, value in pairs(t) do
+        if type(value) == "table" then
+            print(indent_str .. tostring(key) .. ":")
+            print_table(value, indent + 1)
+        else
+            print(indent_str .. tostring(key) .. ": " .. tostring(value))
+        end
+    end
+end
+---------
+
 local exclude_names = { ["x"] = true, ["X"] = true, ["[ ]"] = true }
 local function should_exclude(name)
   return exclude_names[name] ~= nil
@@ -26,16 +42,13 @@ local function process_block(block, header_stack, name_dict)
         if should_exclude(name) then
           goto continue
         end
-        print("Processing name:", name)
-        print("Current name_dict[name]:", name_dict[name])
         if name_dict[name] == nil then
-            print("Initializing name_dict[name] for:", name)
             name_dict[name] = {}
         end
-        print("Current header_stack:", header_stack)
         local entry = {
-            header_stack = header_stack or {},  -- Safeguard against nil header_stack
-            content = content or ""  -- Safeguard against nil content
+            header_stack = header_stack or {},  
+            content = content or "",
+            order = #name_dict[name] + 1  
         }
         table.insert(name_dict[name], entry)
       end
@@ -72,6 +85,9 @@ local function extract_lines_by_name(blocks)
       process_block(block, header_stack, name_dict)
     end
   end
+  ----------
+  print_table(name_dict)
+  ----------
   local new_blocks = {}
   local sorted_names = {}
   for name in pairs(name_dict) do

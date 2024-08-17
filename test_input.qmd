@@ -6,15 +6,17 @@ format:
     output-file: test.md
 ---
 
-# Header 1
+# The big Header at the top
 
-## Sparky header 2
+## Sparky header which doesn't have any content
 
-## Used header 2
+Apart from this paragraph, with no name. 
+
+## An actual list of tasks
 
 - [x] the task is complete [Josh]
 
-### Moo
+### Moo comes first
 
 - This is a sentence with [Tom, Dick].
 - Another line with [Dick, Harry].
@@ -25,7 +27,7 @@ format:
 
 What about this then, huh? [Jemima, Dudo]
 
-### Mong
+### Mong comes second
 
 - this item appears under Mong [Jane]
 - and they can be relied upon to appear correctly [Arnold]
