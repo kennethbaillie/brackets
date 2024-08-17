@@ -28,14 +28,11 @@ local function process_block(block, header_stack, name_dict)
         end
         print("Processing name:", name)
         print("Current name_dict[name]:", name_dict[name])
-
         if name_dict[name] == nil then
             print("Initializing name_dict[name] for:", name)
             name_dict[name] = {}
         end
-
         print("Current header_stack:", header_stack)
-
         local entry = {
             header_stack = header_stack or {},  -- Safeguard against nil header_stack
             content = content or ""  -- Safeguard against nil content
@@ -65,7 +62,6 @@ local function extract_lines_by_name(blocks)
   local name_dict = {}
   local header_stack = {}
   local prev_header_stack = {}
-
   for _, block in ipairs(blocks) do
     if block.t == 'Header' then
       while #header_stack > 0 and header_stack[#header_stack].level >= block.level do
@@ -76,15 +72,12 @@ local function extract_lines_by_name(blocks)
       process_block(block, header_stack, name_dict)
     end
   end
-
   local new_blocks = {}
   local sorted_names = {}
-
   for name in pairs(name_dict) do
     table.insert(sorted_names, name)
   end
   table.sort(sorted_names)
-
   for _, name in ipairs(sorted_names) do
     if not prev_header_stack[name] then
       prev_header_stack[name] = {}
@@ -115,7 +108,6 @@ local function extract_lines_by_name(blocks)
       end
     end
   end
-
   return new_blocks
 end
 
