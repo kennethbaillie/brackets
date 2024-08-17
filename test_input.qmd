@@ -1,9 +1,7 @@
 ---
 title: "Test document"
 filters: [brackets.lua]
-format:
-  md:
-    output-file: test.md
+format: md
 ---
 
 # The big Header at the top
@@ -15,6 +13,15 @@ Apart from this paragraph, with no name.
 ## An actual list of tasks [Jemima]
 
 - [x] the task is complete [Josh]
+
+A numbered list starts here: 
+
+1. This is the first item
+2. This item is assigned [Jane]
+3. This item is not assigned: 
+  + this is a sublist
+  + this is a sublist assigned to a person [Bob]
+  + this toto
 
 ### Moo comes first
 
