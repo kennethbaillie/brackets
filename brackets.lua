@@ -94,16 +94,12 @@ function Pandoc(doc)
       end
       local h_index = 1
       for j, header in ipairs(entry.headers) do
-        print(string.format("%s. Comparing prev: '%s' with current: '%s'", name, prev_header_stack[name][j] or "nil", header.content))
         if (prev_header_stack[name][j] or "nil") == header.content then
-          print (string.format("should drop this bad boy %s==%s", prev_header_stack[name][j], header.content))
           h_index = j+1
         else
-          print ("breaking")
           break
         end
       end
-      print (string.format("loop ended, h_index=%s", h_index))
       prev_header_stack[name] = stored_header_stack
       local header_text = ""
       for i = h_index, #entry.headers do
