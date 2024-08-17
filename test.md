@@ -71,7 +71,6 @@ What about this then, huh? \[Jemima, Dudo\]
 >> An actual list of tasks [Jemima]
 
 >> An actual list of tasks [Jemima]
->>> Moo comes first
 
 What about this then, huh? \[Jemima, Dudo\]
 

@@ -129,13 +129,14 @@ function Pandoc(doc)
       end
 
       -- Debugging print statements to track header comparison
-      print (entry.content)
+      print (string.format("New content: %s", entry.content))
+      print_table(entry.headers)
       
       for j, header in ipairs(entry.headers) do
-        print(string.format("%s. Comparing prev: '%s' with current (l:%s): '%s'",
-          name, prev_header_stack[name][header.level] or "nil", header.level, header.content))
-        if prev_header_stack[name][header.level] or "nil" == header.content then
-          print (string.format("should drop this bad boy %s==%s", j, header.level))
+        print(string.format("%s. Comparing prev: '%s' with current (j:%s, l:%s): '%s'",
+          name, prev_header_stack[name][j] or "nil", j, j, header.content))
+        if prev_header_stack[name][j] or "nil" == header.content then
+          print (string.format("should drop this bad boy %s==%s", j, j))
           table.remove(entry.headers, j)
           -----
           for i, header in ipairs(entry.headers) do
@@ -143,6 +144,7 @@ function Pandoc(doc)
           end
           -----
         else
+          print ("breaking")
           break
         end
       end
