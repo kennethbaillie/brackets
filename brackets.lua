@@ -122,16 +122,23 @@ function Pandoc(doc)
     local entries = name_dict[name]
     table.sort(entries, function(a, b) return a.order < b.order end)
 
-    -- Process entries for this name
     for _, entry in ipairs(entries) do
-      local stored_header_stack = shallow_copy(entry.headers)
+      local stored_header_stack = {}
+      for i, header in ipairs(entry.headers) do
+        stored_header_stack[i] = header.content
+      end
+
+      -- Debugging print statements to track header comparison
+      print (entry.content)
+      
       local i = 1
       while i <= #entry.headers do
         print ("considering")
-        print_table(entry.headers)
+        for i, header in ipairs(entry.headers) do
+          print(string.format("%s. Comparing previous header: '%s' with current header: '%s'", name, prev_header_stack[name][i] or "nil", header.content))
+        end
         if prev_header_stack[name][i] and prev_header_stack[name][i] == entry.headers[i].content then
-          print ("removing" .. i)
-          print_table(entry.headers)
+          print(string.format("%s. Removing: '%s' because it matches: '%s'", name, prev_header_stack[name][i] or "nil", entry.headers[i].content))
           table.remove(entry.headers, i)
         else
           break
