@@ -131,21 +131,23 @@ function Pandoc(doc)
       -- Debugging print statements to track header comparison
       print (entry.content)
       
-      local i = 1
-      while i <= #entry.headers do
-        print ("considering")
-        for i, header in ipairs(entry.headers) do
-          print(string.format("%s. Comparing previous header: '%s' with current header: '%s'", name, prev_header_stack[name][i] or "nil", header.content))
-        end
-        if prev_header_stack[name][i] and prev_header_stack[name][i] == entry.headers[i].content then
-          print(string.format("%s. Removing: '%s' because it matches: '%s'", name, prev_header_stack[name][i] or "nil", entry.headers[i].content))
-          table.remove(entry.headers, i)
+      for j, header in ipairs(entry.headers) do
+        print(string.format("%s. Comparing prev: '%s' with current (l:%s): '%s'",
+          name, prev_header_stack[name][header.level] or "nil", header.level, header.content))
+        if prev_header_stack[name][header.level] or "nil" == header.content then
+          print (string.format("should drop this bad boy %s==%s", j, header.level))
+          table.remove(entry.headers, j)
+          -----
+          for i, header in ipairs(entry.headers) do
+            print (string.rep(">", header.level) .. " " .. header.content)
+          end
+          -----
         else
           break
         end
       end
       prev_header_stack[name] = stored_header_stack
-
+        
       local header_text = ""
       for i, header in ipairs(entry.headers) do
         header_text = header_text .. string.rep(">", header.level) .. " " .. header.content .. "\n"
