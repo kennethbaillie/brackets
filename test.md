@@ -25,6 +25,7 @@
 
 -   This is a sentence with \[Tom, Dick\].
 
+> The big Header at the top
 >> An actual list of tasks [Jemima]
 >>> Moo comes first
 
@@ -46,6 +47,7 @@ What about this then, huh? \[Jemima, Dudo\]
 
 -   Another line with \[Dick, Harry\].
 
+> The big Header at the top
 >> An actual list of tasks [Jemima]
 >>> Moo comes first
 
@@ -59,11 +61,13 @@ What about this then, huh? \[Jemima, Dudo\]
 
 -   And actually a fourth one, now added. \[Jane\]
 
+> The big Header at the top
 >> An actual list of tasks [Jemima]
 >>> Moo comes first
 
 -   list items appear as seperate blocks \[Jane\]
 
+> The big Header at the top
 >> An actual list of tasks [Jemima]
 >>> Mong comes second
 
@@ -74,6 +78,7 @@ What about this then, huh? \[Jemima, Dudo\]
 > The big Header at the top
 >> An actual list of tasks [Jemima]
 
+> The big Header at the top
 >> An actual list of tasks [Jemima]
 >>> Moo comes first
 
@@ -84,6 +89,7 @@ What about this then, huh? \[Jemima, Dudo\]
 > The big Header at the top
 >> Sparky header which doesn’t have any content [Josh]
 
+> The big Header at the top
 >> An actual list of tasks [Jemima]
 
 -   ☒ the task is complete \[Josh\]
@@ -96,6 +102,7 @@ What about this then, huh? \[Jemima, Dudo\]
 
 -   This is a sentence with \[Tom, Dick\].
 
+> The big Header at the top
 >> An actual list of tasks [Jemima]
 >>> Moo comes first
 

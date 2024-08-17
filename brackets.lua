@@ -47,10 +47,6 @@ local order_counter = 0
 -- Function to process each line
 local function process_line(line, header_stack, name_dict, is_header)
   order_counter = order_counter + 1
-  print(order_counter)
-  print("Header stack submitted to process_line:")
-  print_table(header_stack)
-
   -- Check if line contains bracketed content
   for bracketed_content in line:gmatch('%[(.-)%]') do
     if should_ignore(bracketed_content) then
@@ -128,14 +124,14 @@ function Pandoc(doc)
 
     -- Process entries for this name
     for _, entry in ipairs(entries) do
-      local stored_header_stack = {}
-      for i, header in ipairs(entry.headers) do
-        stored_header_stack[i] = header.content
-      end
-
+      local stored_header_stack = shallow_copy(entry.headers)
       local i = 1
       while i <= #entry.headers do
+        print ("considering")
+        print_table(entry.headers)
         if prev_header_stack[name][i] and prev_header_stack[name][i] == entry.headers[i].content then
+          print ("removing" .. i)
+          print_table(entry.headers)
           table.remove(entry.headers, i)
         else
           break
