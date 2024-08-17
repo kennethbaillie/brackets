@@ -131,13 +131,12 @@ function Pandoc(doc)
       -- Debugging print statements to track header comparison
       print (string.format("New content: %s", entry.content))
       print_table(entry.headers)
-      local h_index = 0
+      local h_index = 1
       for j, header in ipairs(entry.headers) do
-        print(string.format("%s. Comparing prev: '%s' with current (j:%s, l:%s): '%s'",
-          name, prev_header_stack[name][j] or "nil", j, j, header.content))
-        if prev_header_stack[name][j] or "nil" == header.content then
-          print (string.format("should drop this bad boy %s==%s", j, j))
-          h_index = j
+        print(string.format("%s. Comparing prev: '%s' with current: '%s'", name, prev_header_stack[name][j] or "nil", header.content))
+        if (prev_header_stack[name][j] or "nil") == header.content then
+          print (string.format("should drop this bad boy %s==%s", prev_header_stack[name][j], header.content))
+          h_index = j+1
         else
           print ("breaking")
           break

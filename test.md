@@ -25,8 +25,6 @@
 
 -   This is a sentence with \[Tom, Dick\].
 
->>> Moo comes first
-
 -   Another line with \[Dick, Harry\].
 
 ### Dudo
@@ -45,8 +43,6 @@ What about this then, huh? \[Jemima, Dudo\]
 
 -   Another line with \[Dick, Harry\].
 
->>> Moo comes first
-
 -   And a third line with \[Tom, Harry, Bob\].
 
 ### Jane
@@ -56,8 +52,6 @@ What about this then, huh? \[Jemima, Dudo\]
 >>> Moo comes first
 
 -   And actually a fourth one, now added. \[Jane\]
-
->>> Moo comes first
 
 -   list items appear as seperate blocks \[Jane\]
 
@@ -70,7 +64,6 @@ What about this then, huh? \[Jemima, Dudo\]
 > The big Header at the top
 >> An actual list of tasks [Jemima]
 
->> An actual list of tasks [Jemima]
 >>> Moo comes first
 
 What about this then, huh? \[Jemima, Dudo\]
@@ -91,7 +84,5 @@ What about this then, huh? \[Jemima, Dudo\]
 >>> Moo comes first
 
 -   This is a sentence with \[Tom, Dick\].
-
->>> Moo comes first
 
 -   And a third line with \[Tom, Harry, Bob\].
