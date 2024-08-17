@@ -16,7 +16,6 @@ local function print_table(t, indent)
 end
 ---------
 
-
 -- Functions for excluding and ignoring names
 local exclude_names = { ["x"] = true, ["X"] = true, ["[ ]"] = true }
 local function should_exclude(name)
@@ -78,24 +77,30 @@ end
 
 -- Function to process the entire document
 function Pandoc(doc)
-  local plain_text = pandoc.write(doc, 'plain')
   local name_dict = {}
   local header_stack = {}
-  
-  -- Split plain text into lines and process each line
-  for line in plain_text:gmatch("[^\r\n]+") do
-    -- Simulate header stack handling
-    if line:match("^#+") then
-      print ("header found:")
-      print (line)
-      local level = #line:match("^#+")  -- Count the number of leading '#' to determine header level
+
+  -- Iterate through each block in the document
+  for _, block in ipairs(doc.blocks) do
+    if block.t == 'Header' then
+      local level = block.level
+      local content = pandoc.utils.stringify(block)
+
+      print("Header found:")
+      print(content)
+
+      -- Adjust the header stack based on the level
       while #header_stack > 0 and header_stack[#header_stack].level >= level do
         table.remove(header_stack)
       end
-      table.insert(header_stack, {level = level, content = line})
+      table.insert(header_stack, {level = level, content = content})
     else
-      -- Process non-header lines
-      process_line(line, header_stack, name_dict)
+      -- Create a temporary Pandoc document for the block
+      local temp_doc = pandoc.Pandoc({block})
+      local plain_text = pandoc.write(temp_doc, 'plain')
+      for line in plain_text:gmatch("[^\r\n]+") do
+        process_line(line, header_stack, name_dict)
+      end
     end
   end
 
