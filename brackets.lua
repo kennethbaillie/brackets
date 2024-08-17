@@ -1,4 +1,3 @@
-local pandoc = require 'pandoc'
 
 ---------
 local function print_table(t, indent)
@@ -15,6 +14,7 @@ local function print_table(t, indent)
     end
 end
 ---------
+local pandoc = require 'pandoc'
 
 -- Functions for excluding and ignoring names
 local exclude_names = { ["x"] = true, ["X"] = true, ["[ ]"] = true }
@@ -45,7 +45,7 @@ end
 local order_counter = 0
 
 -- Function to process each line
-local function process_line(line, header_stack, name_dict)
+local function process_line(line, header_stack, name_dict, is_header)
   order_counter = order_counter + 1
   print(order_counter)
   print("Header stack submitted to process_line:")
@@ -66,7 +66,7 @@ local function process_line(line, header_stack, name_dict)
       end
       local entry = {
           headers = shallow_copy(header_stack),
-          content = line,
+          content = is_header and "" or line,  -- Blank content if it's a header
           order = order_counter
       }
       table.insert(name_dict[name], entry)
@@ -94,12 +94,16 @@ function Pandoc(doc)
         table.remove(header_stack)
       end
       table.insert(header_stack, {level = level, content = content})
+
+      -- Check for names in square brackets within the header and process with blank content
+      process_line(content, header_stack, name_dict, true)
+
     else
       -- Create a temporary Pandoc document for the block
       local temp_doc = pandoc.Pandoc({block})
       local plain_text = pandoc.write(temp_doc, 'plain')
       for line in plain_text:gmatch("[^\r\n]+") do
-        process_line(line, header_stack, name_dict)
+        process_line(line, header_stack, name_dict, false)
       end
     end
   end
@@ -150,7 +154,9 @@ function Pandoc(doc)
       if header_text ~= "" then
         table.insert(new_blocks, pandoc.RawBlock('markdown', header_text))
       end
-      table.insert(new_blocks, pandoc.Para(pandoc.Str(entry.content)))
+      if entry.content ~= "" then
+        table.insert(new_blocks, pandoc.Para(pandoc.Str(entry.content)))
+      end
     end
   end
 
