@@ -1,18 +1,14 @@
 ---
-title: "Test document"
-filters: [brackets.lua]
+filters: [brackets]
+output-file: people
 format: md
 ---
 
 # The big Header at the top
 
-## A header which doesn't have any content [Ahmad]
+## An actual list of tasks 
 
-Apart from this paragraph, with no name. 
-
-## An actual list of tasks [Jemima]
-
-- [x] the task is complete [Ahmad]
+- [X] the task is complete [Ahmad]
 
 A numbered list starts here: 
 
@@ -36,5 +32,5 @@ What about this then, huh? [Jemima, Ganesh]
 
 ### This header comes later
 
-- this item appears under Mong [Jane]
+- this item appears under the late header [Jane]
 - and they can be relied upon to appear correctly [Arnold]
