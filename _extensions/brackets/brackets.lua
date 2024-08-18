@@ -51,6 +51,10 @@ local function process_line(line, header_stack, name_dict, is_header)
 end
 
 function Pandoc(doc)
+  if doc.meta.quarto == nil then
+    return doc -- Return early if this is not a Quarto document
+  end
+  
   local name_dict = {}
   local header_stack = {}
 

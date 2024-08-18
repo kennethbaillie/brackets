@@ -1,0 +1,223 @@
+---
+filters: [brackets]
+---
+
+
+# EMMC shared notes
+
+
+```
+Mantra: more cells more states more genes expressed.
+- we want to survey the gene expression landscape to reveal cell type- and state-specific gene expression, in order to find molQTL that explain GWAS hits. 
+```
+
+## Overview and policies
+
+### Admin and preparation
+
+- [ ] make draft schedule for postdocs in delivery phase to show that it is possible [Lizi, Max]
+- [x] review ethical approvals and plan amendments [Sara CH, Wilna, Primmy]
+
+### Computational preparation
+
+- [ ] collate favourite genes [Everyone]
+- [ ] define list of "GWAS genes" to use for evaluating pilot data, with an arbitrary maximum number of "GWAS genes" arising from any one phenotype [Konrad, Kenny]. Use proximity (eg FANTOM5 TSS =/- 10000bp) to GWAS hits at a given p-value threshold, with a maximum (n) hits from a given study, and a separate maximum (m) hits from a given phenotype in the GWAS catalog. 
+
+- [ ] define "GWAS hits explained" in hard methods terms [Konrad, Andy]
+
+### List of "favourite" genes
+
+- PDEA4A (Kenny)
+- TYK2 (Kenny)
+
+### List of "favourite" future tissues
+
+Tissues that are included in a given specimen can be used in place of perturbations without any overhead because we already have the specimen. So it is worth considering some possible additions. 
+
+- whole blood following whole-body perturbation (e.g. illness, hypoxia) [Kenny]
+- endometrium [Varsha]
+- pulmonary artery [Johnny]
+- pulmonary vein [Johnny]
+- subcutaneous fat [Sara B]
+- myocardium
+- brown fat
+
+Tissues that require additional approvals or consent processes will need funding. But we should keep a list of key tissues and why we want them:
+
+- brown fat for snRNAseq and metabolomics
+
+#### List of future livestock species & tissues
+
+- pig [Sara CH]
+- sheep [Gerry]
+- cattle: ?
+- chicken [Megan]
+- salmon [Dan]
+- bivalves [Tim]
+
+### Data required from each patient
+
+Data required from patients: 
+- age & sex 
+- surgical features: operation, tumour type, tissue type
+- current medication list
+
+### Core data and metrics
+
+- [ ] write script to download, clean and summarise GWAS hits from GWAS catalog and any other sources. Output should be complete list of robust associations with: (a) any human disease (b) any disease-related trait. We will call these our **"GWAS hit set"**.
+
+- [ ] write script to use the **GWAS hit set** set to define the set of "Disease transcripts"
+
+- [ ] write and test methodology for identifying **"GWAS hits explained"** : i.e. number of GWAS hits in the **GWAS hit set** that significantly co-localise with an eQTL in eQTLgen, GTEx, or EMMC datasets. 
+
+- [ ] create systematic wish list of tissues for EMMC. Delegate. Joint synovium, bone, cartilage, bone marrow, uterine tissue, fallopian tube, vas deferens, spleen, liver, gut. What healthy tissues are available; what GWAS data exist? [Johnny]
+
+## Criteria for including a tissue/perturbation in delivery phase
+
+1. Optimise choice of perturbations to maxmise number of different *GWAS hits explained*.
+2. Sufficient stock of perturbation reagent can be obtained and stored so that it will last for 4 years
+
+## Spatial transcriptomics
+
+- Follow up on this paper: https://pubmed.ncbi.nlm.nih.gov/32161175/ [Sara]
+- Follow up on this paper (using a neural net but similar concept): https://pubmed.ncbi.nlm.nih.gov/29494619/ [Kenny]
+
+## Pilot Pilot phase
+
+- [ ] choose brain regions [Paul]
+Brain: 4 tissue types, in order of priority: temporal, frontal, parietal and occipital
+Skin: any - treat as one source
+
+To Do:
+
+- [ ] coordinate with tissue-specific ECRs/PIs for SOPs
+- [x] Quantify expected median time to first analysis for fresh skin from Edinburgh and Glasgow, with evidence for each. Use existing experience in Sara Brown lab for to work out median time for Edinburgh. The endpoint should be the point of freezing an unperturbed sample for nuclear extraction. [Max]
+- [ ] date and plan
+
+### First plate setup (pilot-pilot):
+
+Aim: Deep (#seq per cell) and broad (#cells/cell types) sequencing to allow for discovery and benchmarking for future setup.
+
+Tissues: 4
+Individuals per tissue: 2
+Perturbations: 1 (IFNg or TNFa)
+WT: 1
+
+8 samples. In triplicate (24). On 96 well plate (1E6).
+
+Output: snRNAseq libraries from 24 samples.
+
+To Do:
+
+- [ ] confirm SOPs 
+- [ ] price up reagents
+- [ ] date and plan
+- [ ] Confirm sequencing
+
+## Pilot phase
+
+Objectives: 
+(1) optimise selection of perturbations & timepoints to maximise number of different "disease transcripts" expressed. 
+(2) optimise tissue handling for consistent results
+(3) optimise perturbations for consistent results
+
+"Disease transcripts" are transcripts with a predicted TSS within 20kb of a GWAS hit. 
+
+For each tissue and perturbation, PARSE seq large number of cells at standard number of reads-per-cell in order to enable an informed decision on the balance between cell number and reads-per-cell. NB Sanger team are doing lots of this and can also supply pilot data.
+
+## EMMC Admin Meetings (latest 10 June 2024)
+
+- [x] Create a single csv file for perturbation lists and delete any old files to avoid confusion. [Max, Lizi]
+- [x] Liaise with each PI for populating perturbation lists. [Max, Lizi]
+- [ ] Look for additional perturbations (not limited to 4 core tissues). [Max, Lizi]
+- [ ] Look for published RNA-Seq (bulk or single cell) data for Alzheimer's to identify similarites, differences between samples for potential perturbation stocks. [Max, Lizi]
+- [ ] Develop efficient nuclei extraction SOPs for each tissue. [Max, Lizi]
+- [ ] Prep for next EMMC progress meeting (08.07.2024 TBC) [Max, Lizi, Primmy]
+    - [x] Perturbation shortlisting for discussion [Lizi, Max]
+    - [x] Update repo with times and discussion topics: keep to most important|interesting|controversial topics for meetings (1 week in advance) [Lizi, Max]
+    - [x] Conduct technical meetings with PIs, then with Kenny (up to 1 week in advance) [Lizi, Max]
+    - [x] Write agenda and email out to PIs (1 week in advance) [Lizi, Max]
+- [x] Test out Miltenyi tissue dissociator and determine if Singulator is fit for purpose (Free trial kit from Miltenyi enough for 6 samples - test for PCLS and skin). [Max, Lizi]
+- [x] Set up PSH lab space
+    - [x] Induction, H&S training, paperwork etc. [Lizi, Max]
+    - [x] Order and stock consumables [Lizi, Max, Sara]
+    - [x] Clear bench space [Rich, Anto]
+    - [ ] Check vibratome and components are usable [Lizi, Max]
+
+## Nuclei extraction optimization and tissue work
+Default nuclei isolation protocol from Ruiz Daniels, et al., 2023.
+
+### (1) PBMCs: Isolation of human PBMCs and Nuclei extraction under different conditions (fresh/frozen pellet/cryopreserved cells).
+- [x] Fresh cells
+- [x] Frozen cell pellet
+- [x] Cryopreserved cells
+- [x] Seed fresh PBMCs at different densities, freeze in DMSO/FBS and extract nuclei (see optimal seeding density for good nuclei retrival).
+
+**Outcome and future tasks**
+- Fresh cells: Lysis after 1 + 5 mins too little (>70% viability), complete timecourse for fresh samples.
+- Fresh cells: Number of cells too high (20M) reduce down to 4M (speak to James for number of cells needed for sequencing).
+- Frozen pellet clumped and >10% viability after 1 min lysis.
+- Frozen cells in DMSO/FBS achieved good nuclei condition and viability <1% after 1 min lysis.
+- 300k/well/96-well plate too low density for good nuclei yield, increase to 48/24 well plate.
+
+### (2) PCLS: Nuclei extraction from piglet and adult Porcine PCLS.
+- [x] Cryopreserved PCLS
+    - [x] Optimise Luna FX7 nuclear counting paramters (direct compare to trypan + haemocytometer?)
+- [ ] Fresh PCLS
+    - [ ] Live-dead stain flow cytometry of pre-lysed cells (fresh vs frozen PCLS - death toll of freezing PCLS?).
+- [x] Investigate methods of removing agarose (centrifuge? Flow?).
+- [x] Test Miltenyi kit for nuclei extraction and selection/enrichment.
+- [x] Test nuclei extraction from adult porcine PCLS (Miltenyi kit and in house protocol).
+
+**Outcome and future tasks**
+- Cryopreserved PCLS: 2-3 PCLS per extraction appropriate for 30mg tissue as per protocol.
+- For flow cytometry, filter through 10um strainer? need to avoid agarose going into the microfluidics (what is the maximum size allowed - speak to Anna). Akira, Josh and Nelly are trained on flow cytometer.
+- High amount of well extracted nuclei achieved using Miltenyi kit (500k from 2xs PCLS) with no agarose/cellular debris. Test in adult PCLS as more comparable to adult human.
+- Much fewer nuclei were obtained from adult pig PCLS compared with piglet. We would need to scale up. Test for human tissue.
+
+### (3) Skin: Nuclei extraction from skin punch biopsies.
+- [x] Collect 4mm skin biopsy samples and snap freeze.
+- [x] Test Miltenyi nuclei extraction kit and trypan blue counts + images.
+- [x] Test nuclei extraction and yield from snap frozen cultured biopsies, Miltenyi vs Daniels protocol.
+- [x] Test Daniels buffers and Miltenyi kit with 5mm biopsies and 10um filters.
+
+**Outcome and future tasks**
+- 9xs 4mm Skin biopsies were taken in the IGC with Sara B's lab and stored in their -80C.
+- Miltenyi kit achieved good nuclei extraction and purity without enrichment. Approx. 3xs 4mm biopsies required for enough nuclei for sequencing.
+
+### (4) Brain
+- [x] Shadow team for brain slice generation and culture.
+- [x] Work with Zoeb for nuclei extraction optimising.
+
+## Lung perturbations and procurement 16-May-2024
+- [x] Update Perturbation list [Johnny]
+- [x] Liaise with Jen and Ahsan for funding of research nurse/lung tissue acquisition pipelines [Johnny]
+
+## External partners
+- Arrange meeting with Gosia Trynka, Lude Franke and others about collaboration
+
+## Meeting Sara B - 13-June-2024
+ - C-Section skin tissue not a good souce of tissue for EMMC due to hormonal and stretch perturbation on the transcriptome.
+ - Greater Glasgow and Clyde Biorespository application sent by SB for 120 skin samples - cost £24k to be reimbursed by EMMC for EMMC priority and to share with Sara B.
+
+- [x] Sara B to liase with Primmy/Wilna for MTA and new PO for Glasgow skin samples [Sara B/Primmy/Wilna].
+- [x] Collect 12xs 4-5 mm skin biopsies W/C 17-June [Max/Lizi].
+- [ ] Sara B to talk to Rebecca Reynolds about access for re-excision c-section skin tissue [Sara B].
+- [ ] Check costing of courier from Glasgow to Edinburgh [Primmy].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
