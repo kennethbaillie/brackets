@@ -51,10 +51,7 @@ local function process_line(line, header_stack, name_dict, is_header)
 end
 
 function Pandoc(doc)
-  if doc.meta.quarto == nil then
-    return doc -- Return early if this is not a Quarto document
-  end
-  
+  print ("Running brackets extension")
   local name_dict = {}
   local header_stack = {}
 
