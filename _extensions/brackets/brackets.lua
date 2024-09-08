@@ -1,43 +1,40 @@
-local pandoc = require 'pandoc'
+-- _extensions/brackets/brackets.lua
+local pandoc = require("pandoc")
 
+-- Function to call the Python script and capture its output
+function get_bracket_text(file_content)
+  -- Create a temporary file to store the input text
+  local temp_file = os.tmpname()
+  local temp_output = os.tmpname()
+
+  -- Write the file content to the temporary input file
+  local f = io.open(temp_file, "w")
+  f:write(file_content)
+  f:close()
+
+  -- Call the Python script with the temporary input file
+  os.execute("python3 _extensions/brackets/brackets.py " .. temp_file .. " " .. temp_output)
+
+  -- Read the output from the temporary output file
+  local f_output = io.open(temp_output, "r")
+  local result = f_output:read("*all")
+  f_output:close()
+
+  -- Clean up the temporary files
+  os.remove(temp_file)
+  os.remove(temp_output)
+
+  return result
+end
+
+-- Pandoc filter to process the entire document
 function Pandoc(doc)
-    print("Running Lua bridge to Python brackets extension (new approach)")
+  -- Get the entire text of the document
+  local doc_text = pandoc.utils.stringify(doc)
 
-    -- Convert the Pandoc document to plain text
-    local plain_text = pandoc.write(doc, 'plain')
+  -- Call the Python script and get the processed result
+  local output = get_bracket_text(doc_text)
 
-    -- Create a temporary file for input
-    local input_file = os.tmpname()
-    local f = io.open(input_file, 'w')
-    f:write(plain_text)
-    f:close()
-
-    -- Create a temporary file for output
-    local output_file = os.tmpname()
-
-    -- Call the Python script
-    local command = string.format("python3 _extensions/brackets/brackets.py < %s > %s 2>brackets_error.log", input_file, output_file)
-    local exit_code = os.execute(command)
-
-    if exit_code ~= 0 then
-        local error_log = io.open("brackets_error.log", "r")
-        local error_message = error_log:read("*all")
-        error_log:close()
-        error("Python script execution failed: " .. error_message)
-    end
-
-    -- Read the output
-    local f = io.open(output_file, 'r')
-    local output_text = f:read('*all')
-    f:close()
-
-    -- Clean up temporary files
-    os.remove(input_file)
-    os.remove(output_file)
-    os.remove("brackets_error.log")
-
-    -- Parse the output text back into a Pandoc document
-    local new_doc = pandoc.read(output_text, 'markdown')
-
-    return new_doc
+  -- Return the output as a list of blocks (RawBlock in markdown)
+  return pandoc.Pandoc({ pandoc.RawBlock("markdown", output) })
 end
