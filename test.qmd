@@ -1,0 +1,10 @@
+---
+filters: [brackets]
+output-file: people
+format: md
+---
+
+
+# heaading
+
+Text
