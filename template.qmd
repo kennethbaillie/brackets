@@ -1,6 +1,4 @@
 ---
-filters: [brackets]
-output-file: people
 format: md
 ---
 
@@ -17,7 +15,7 @@ A numbered list starts here:
 3. This item is not assigned: 
   + this is a sublist
   + this is a sublist assigned to a person [Bob]
-  + this todo
+  + boffle boff
 
 ### This header comes early
 

@@ -14,8 +14,7 @@ A numbered list starts here:
 
 -   this is a sublist
 -   this is a sublist assigned to a person \[Bob\]
--   this todo \[Germaine\]
--   another task \[Watching\]
+-   boff
 
 ### This header comes early
 
