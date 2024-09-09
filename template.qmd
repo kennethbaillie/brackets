@@ -1,10 +1,12 @@
 ---
+filters: [brackets]
+output-file: people
 format: md
 ---
 
 # The big Header at the top
 
-## An actual list of tasks 
+## An actual list of tasks
 
 - [X] the task is complete [Ahmad]
 
