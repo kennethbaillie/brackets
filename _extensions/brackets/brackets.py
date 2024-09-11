@@ -47,7 +47,7 @@ def remove_yaml(theselines):
     return theselines
 
 def process_line(line, header_stack, name_dict, header_match):
-    bracketed_contents = re.findall(r'\[(.*?)\]', line)
+    bracketed_contents = re.findall(r'\[(.*?)\](?!\(http)', line)
     for content in bracketed_contents:
         if should_ignore(content):
             continue
