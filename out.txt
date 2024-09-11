@@ -209,73 +209,6 @@ template.qmd > The big Header at the top > An actual list of tasks > This header
 - and they can be relied upon to appear correctly [Arnold]
 
 
-# 
-
-shared_tasklist.qmd > EMMC shared notes > Overview and policies > Admin and preparation
-
-- [ ] make draft schedule for postdocs in delivery phase to show that it is possible [Lizi, Max]
-
- >  >  > Computational preparation
-
-- [ ] collate favourite genes [Everyone]
-
-- [ ] define list of "GWAS genes" to use for evaluating pilot data, with an arbitrary maximum number of "GWAS genes" arising from any one phenotype [Konrad, Kenny]. Use proximity (eg FANTOM5 TSS =/- 10000bp) to GWAS hits at a given p-value threshold, with a maximum (n) hits from a given study, and a separate maximum (m) hits from a given phenotype in the GWAS catalog. 
-
-- [ ] define "GWAS hits explained" in hard methods terms [Konrad, Andy]
-
- >  >  > Core data and metrics
-
-- [ ] write script to download, clean and summarise GWAS hits from GWAS catalog and any other sources. Output should be complete list of robust associations with: (a) any human disease (b) any disease-related trait. We will call these our **"GWAS hit set"**.
-
-- [ ] write script to use the **GWAS hit set** set to define the set of "Disease transcripts"
-
-- [ ] write and test methodology for identifying **"GWAS hits explained"** : i.e. number of GWAS hits in the **GWAS hit set** that significantly co-localise with an eQTL in eQTLgen, GTEx, or EMMC datasets. 
-
-- [ ] create systematic wish list of tissues for EMMC. Delegate. Joint synovium, bone, cartilage, bone marrow, uterine tissue, fallopian tube, vas deferens, spleen, liver, gut. What healthy tissues are available; what GWAS data exist? [Johnny]
-
- >  > Pilot Pilot phase
-
-- [ ] choose brain regions [Paul]
-
-- [ ] coordinate with tissue-specific ECRs/PIs for SOPs
-
-- [ ] date and plan
-
- >  >  > First plate setup (pilot-pilot):
-
-- [ ] confirm SOPs 
-
-- [ ] price up reagents
-
-- [ ] date and plan
-
-- [ ] Confirm sequencing
-
- >  > EMMC Admin Meetings (latest 10 June 2024)
-
-- [ ] Look for additional perturbations (not limited to 4 core tissues). [Max, Lizi]
-
-- [ ] Look for published RNA-Seq (bulk or single cell) data for Alzheimer's to identify similarites, differences between samples for potential perturbation stocks. [Max, Lizi]
-
-- [ ] Develop efficient nuclei extraction SOPs for each tissue. [Max, Lizi]
-
-- [ ] Prep for next EMMC progress meeting (08.07.2024 TBC) [Max, Lizi, Primmy]
-
-    - [ ] Check vibratome and components are usable [Lizi, Max]
-
- >  > Nuclei extraction optimization and tissue work > (2) PCLS: Nuclei extraction from piglet and adult Porcine PCLS.
-
-- [ ] Fresh PCLS
-
-    - [ ] Live-dead stain flow cytometry of pre-lysed cells (fresh vs frozen PCLS - death toll of freezing PCLS?).
-
- >  > Meeting Sara B - 13-June-2024
-
-- [ ] Sara B to talk to Rebecca Reynolds about access for re-excision c-section skin tissue [Sara B].
-
-- [ ] Check costing of courier from Glasgow to Edinburgh [Primmy].
-
-
 # Lizi
 
 shared_tasklist.qmd > EMMC shared notes > Overview and policies > Admin and preparation
@@ -371,6 +304,9 @@ shared_tasklist.qmd > EMMC shared notes > Overview and policies > Admin and prep
 
 - [x] review ethical approvals and plan amendments [Sara CH, Wilna, Primmy]
 
+test.qmd > another heading
+
+- [ ] Develop [user journeys](https://github.com/kennethbaillie/lml-management/) [Johnny, Wilna, Kenny, Marie, Konrad]
 
 # Primmy
 
@@ -402,6 +338,9 @@ shared_tasklist.qmd > EMMC shared notes > Overview and policies > Computational 
 
 - [ ] define "GWAS hits explained" in hard methods terms [Konrad, Andy]
 
+test.qmd > another heading
+
+- [ ] Develop [user journeys](https://github.com/kennethbaillie/lml-management/) [Johnny, Wilna, Kenny, Marie, Konrad]
 
 # Kenny
 
@@ -417,6 +356,9 @@ shared_tasklist.qmd > EMMC shared notes > Overview and policies > Computational 
 
 - Follow up on this paper (using a neural net but similar concept): https://pubmed.ncbi.nlm.nih.gov/29494619/ [Kenny]
 
+test.qmd > another heading
+
+- [ ] Develop [user journeys](https://github.com/kennethbaillie/lml-management/) [Johnny, Wilna, Kenny, Marie, Konrad]
 
 # Andy
 
@@ -450,6 +392,9 @@ shared_tasklist.qmd > EMMC shared notes > Overview and policies > List of "favou
 
 - [x] Liaise with Jen and Ahsan for funding of research nurse/lung tissue acquisition pipelines [Johnny]
 
+test.qmd > another heading
+
+- [ ] Develop [user journeys](https://github.com/kennethbaillie/lml-management/) [Johnny, Wilna, Kenny, Marie, Konrad]
 
 # Sara B
 
@@ -548,3 +493,10 @@ Text [sqaure]
 test.qmd > another heading
 
 some other text [jimbob]
+
+
+# Marie
+
+test.qmd > another heading
+
+- [ ] Develop [user journeys](https://github.com/kennethbaillie/lml-management/) [Johnny, Wilna, Kenny, Marie, Konrad]
