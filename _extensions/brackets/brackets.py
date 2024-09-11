@@ -26,8 +26,15 @@ def change_dir(newdir):
 #-------------------
 
 exclude_names = ["x", "X", "[ ]"]
+exclude_stems = ["@","!"]
 def should_exclude(name):
-    return name in exclude_names
+    if name in exclude_names:
+        return True
+    for stem in exclude_stems:
+        if name.startswith(stem):
+            return True
+    else:
+        return False
 
 def should_ignore(bracketed_content):
     return any(re.match(r'^(DOI|PMID)', name.strip()) for name in re.split(r',\s*', bracketed_content))
@@ -111,7 +118,6 @@ def format_output(name_dict):
 ignored_files=[
     "README.md"
 ]
-
 def readfiles(input_path):
     if os.path.isdir(input_path):
         input_files = [
@@ -129,8 +135,10 @@ def readfiles(input_path):
 if __name__ == "__main__":
     input_filepath = sys.argv[1]
     output_file = sys.argv[2]
+    ignored_files.append(os.path.split(output_file)[-1])
     input_files = readfiles(input_filepath)
     final_dict = {}
+    print ("ignored_files", "|".join(ignored_files))
     for input_file in input_files:
         print (input_file)
         thisdir, filename = os.path.split(input_file)
