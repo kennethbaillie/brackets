@@ -112,9 +112,9 @@ def format_output(name_dict):
         for entry in entries:
             headers = " > ".join([h for h in entry["headers"]])
             if len(headers.replace(">","").strip()) > 0:
-                output.append(f"{headers}\n")
+                output.append(f"\n{headers}\n")
             if len(entry['content'].strip()) > 0:
-                output.append(f"{entry['content']}".strip())
+                output.append(f"{entry['content']}  \n".strip())
         output.append("")
     return "\n".join(output)
 
