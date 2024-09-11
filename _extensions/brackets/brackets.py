@@ -105,6 +105,8 @@ def prune_headers(name_dict):
 def format_output(name_dict):
     output = []
     for name, entries in name_dict.items():
+        if name.strip() == '':
+            continue
         output.append(f"# {name}\n")
         for entry in entries:
             headers = " > ".join([h for h in entry["headers"]])
