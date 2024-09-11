@@ -114,7 +114,7 @@ def format_output(name_dict):
             if len(headers.replace(">","").strip()) > 0:
                 output.append(f"{headers}\n")
             if len(entry['content'].strip()) > 0:
-                output.append(f"{entry['content']}")
+                output.append(f"{entry['content']}".strip())
         output.append("")
     return "\n".join(output)
 
