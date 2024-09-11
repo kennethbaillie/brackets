@@ -1,17 +1,61 @@
 # Ahmad
 
-The big Header at the top > An actual list of tasks
+people.md > Ahmad
+
+- [X] the task is complete [Ahmad]
+
+template.qmd > The big Header at the top > An actual list of tasks
 
 - [X] the task is complete [Ahmad]
 
 
 # Jane
 
-The big Header at the top > An actual list of tasks
+people.md > Jane
 
 2. This item is assigned [Jane]
 
  >  > This header comes early [Jane]
+
+- And actually a fourth one, now added. [Jane]
+
+- list items appear as seperate blocks [Jane]
+
+- this item appears under the late header [Jane]
+
+ > Bob
+
+ >  > This header comes early [Jane]
+
+ > Tom
+
+The big Header at the top > An actual list of tasks > This header comes early [Jane]
+
+ > Dick
+
+The big Header at the top > An actual list of tasks > This header comes early [Jane]
+
+ > Harry
+
+The big Header at the top > An actual list of tasks > This header comes early [Jane]
+
+ > Jemima
+
+The big Header at the top > An actual list of tasks > This header comes early [Jane]
+
+ > Ganesh
+
+The big Header at the top > An actual list of tasks > This header comes early [Jane]
+
+ > Arnold
+
+The big Header at the top > An actual list of tasks > This header comes early [Jane] > This header comes later
+
+template.qmd > The big Header at the top > An actual list of tasks
+
+2. This item is assigned [Jane]
+
+ >  >  > This header comes early [Jane]
 
 - And actually a fourth one, now added. [Jane]
 
@@ -24,59 +68,483 @@ The big Header at the top > An actual list of tasks
 
 # Bob
 
-The big Header at the top > An actual list of tasks
+people.md > Bob
 
   + this is a sublist assigned to a person [Bob]
 
- >  > This header comes early [Jane]
+- And a third line with [Tom, Harry, Bob].
+
+ > Tom
+
+- And a third line with [Tom, Harry, Bob].
+
+ > Harry
+
+- And a third line with [Tom, Harry, Bob].
+
+template.qmd > The big Header at the top > An actual list of tasks
+
+  + this is a sublist assigned to a person [Bob]
+
+ >  >  > This header comes early [Jane]
 
 - And a third line with [Tom, Harry, Bob].
 
 
 # Tom
 
-The big Header at the top > An actual list of tasks > This header comes early [Jane]
+people.md > Bob
+
+- And a third line with [Tom, Harry, Bob].
+
+ > Tom
 
 - This is a sentence with [Tom, Dick].
+
+- And a third line with [Tom, Harry, Bob].
+
+ > Dick
+
+- This is a sentence with [Tom, Dick].
+
+ > Harry
+
+- And a third line with [Tom, Harry, Bob].
+
+template.qmd > The big Header at the top > An actual list of tasks > This header comes early [Jane]
+
+- This is a sentence with [Tom, Dick].
+
+- And a third line with [Tom, Harry, Bob].
+
+
+# Harry
+
+people.md > Bob
+
+- And a third line with [Tom, Harry, Bob].
+
+ > Tom
+
+- And a third line with [Tom, Harry, Bob].
+
+ > Dick
+
+- Another line with [Dick, Harry].
+
+ > Harry
+
+- Another line with [Dick, Harry].
+
+- And a third line with [Tom, Harry, Bob].
+
+template.qmd > The big Header at the top > An actual list of tasks > This header comes early [Jane]
+
+- Another line with [Dick, Harry].
 
 - And a third line with [Tom, Harry, Bob].
 
 
 # Dick
 
-The big Header at the top > An actual list of tasks > This header comes early [Jane]
+people.md > Tom
+
+- This is a sentence with [Tom, Dick].
+
+ > Dick
+
+- This is a sentence with [Tom, Dick].
+
+- Another line with [Dick, Harry].
+
+ > Harry
+
+- Another line with [Dick, Harry].
+
+template.qmd > The big Header at the top > An actual list of tasks > This header comes early [Jane]
 
 - This is a sentence with [Tom, Dick].
 
 - Another line with [Dick, Harry].
 
 
-# Harry
-
-The big Header at the top > An actual list of tasks > This header comes early [Jane]
-
-- Another line with [Dick, Harry].
-
-- And a third line with [Tom, Harry, Bob].
-
-
 # Jemima
 
-The big Header at the top > An actual list of tasks > This header comes early [Jane]
+people.md > Jemima
+
+What about this then? [Jemima, Ganesh]
+
+ > Ganesh
+
+What about this then? [Jemima, Ganesh]
+
+template.qmd > The big Header at the top > An actual list of tasks > This header comes early [Jane]
 
 What about this then? [Jemima, Ganesh]
 
 
 # Ganesh
 
-The big Header at the top > An actual list of tasks > This header comes early [Jane]
+people.md > Jemima
+
+What about this then? [Jemima, Ganesh]
+
+ > Ganesh
+
+What about this then? [Jemima, Ganesh]
+
+template.qmd > The big Header at the top > An actual list of tasks > This header comes early [Jane]
 
 What about this then? [Jemima, Ganesh]
 
 
 # Arnold
 
-The big Header at the top > An actual list of tasks > This header comes early [Jane] > This header comes later
+people.md > Arnold
 
 - and they can be relied upon to appear correctly [Arnold]
 
+template.qmd > The big Header at the top > An actual list of tasks > This header comes later
+
+- and they can be relied upon to appear correctly [Arnold]
+
+
+# 
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > Admin and preparation
+
+- [ ] make draft schedule for postdocs in delivery phase to show that it is possible [Lizi, Max]
+
+ >  >  > Computational preparation
+
+- [ ] collate favourite genes [Everyone]
+
+- [ ] define list of "GWAS genes" to use for evaluating pilot data, with an arbitrary maximum number of "GWAS genes" arising from any one phenotype [Konrad, Kenny]. Use proximity (eg FANTOM5 TSS =/- 10000bp) to GWAS hits at a given p-value threshold, with a maximum (n) hits from a given study, and a separate maximum (m) hits from a given phenotype in the GWAS catalog. 
+
+- [ ] define "GWAS hits explained" in hard methods terms [Konrad, Andy]
+
+ >  >  > Core data and metrics
+
+- [ ] write script to download, clean and summarise GWAS hits from GWAS catalog and any other sources. Output should be complete list of robust associations with: (a) any human disease (b) any disease-related trait. We will call these our **"GWAS hit set"**.
+
+- [ ] write script to use the **GWAS hit set** set to define the set of "Disease transcripts"
+
+- [ ] write and test methodology for identifying **"GWAS hits explained"** : i.e. number of GWAS hits in the **GWAS hit set** that significantly co-localise with an eQTL in eQTLgen, GTEx, or EMMC datasets. 
+
+- [ ] create systematic wish list of tissues for EMMC. Delegate. Joint synovium, bone, cartilage, bone marrow, uterine tissue, fallopian tube, vas deferens, spleen, liver, gut. What healthy tissues are available; what GWAS data exist? [Johnny]
+
+ >  > Pilot Pilot phase
+
+- [ ] choose brain regions [Paul]
+
+- [ ] coordinate with tissue-specific ECRs/PIs for SOPs
+
+- [ ] date and plan
+
+ >  >  > First plate setup (pilot-pilot):
+
+- [ ] confirm SOPs 
+
+- [ ] price up reagents
+
+- [ ] date and plan
+
+- [ ] Confirm sequencing
+
+ >  > EMMC Admin Meetings (latest 10 June 2024)
+
+- [ ] Look for additional perturbations (not limited to 4 core tissues). [Max, Lizi]
+
+- [ ] Look for published RNA-Seq (bulk or single cell) data for Alzheimer's to identify similarites, differences between samples for potential perturbation stocks. [Max, Lizi]
+
+- [ ] Develop efficient nuclei extraction SOPs for each tissue. [Max, Lizi]
+
+- [ ] Prep for next EMMC progress meeting (08.07.2024 TBC) [Max, Lizi, Primmy]
+
+    - [ ] Check vibratome and components are usable [Lizi, Max]
+
+ >  > Nuclei extraction optimization and tissue work > (2) PCLS: Nuclei extraction from piglet and adult Porcine PCLS.
+
+- [ ] Fresh PCLS
+
+    - [ ] Live-dead stain flow cytometry of pre-lysed cells (fresh vs frozen PCLS - death toll of freezing PCLS?).
+
+ >  > Meeting Sara B - 13-June-2024
+
+- [ ] Sara B to talk to Rebecca Reynolds about access for re-excision c-section skin tissue [Sara B].
+
+- [ ] Check costing of courier from Glasgow to Edinburgh [Primmy].
+
+
+# Lizi
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > Admin and preparation
+
+- [ ] make draft schedule for postdocs in delivery phase to show that it is possible [Lizi, Max]
+
+ >  > EMMC Admin Meetings (latest 10 June 2024)
+
+- [x] Create a single csv file for perturbation lists and delete any old files to avoid confusion. [Max, Lizi]
+
+- [x] Liaise with each PI for populating perturbation lists. [Max, Lizi]
+
+- [ ] Look for additional perturbations (not limited to 4 core tissues). [Max, Lizi]
+
+- [ ] Look for published RNA-Seq (bulk or single cell) data for Alzheimer's to identify similarites, differences between samples for potential perturbation stocks. [Max, Lizi]
+
+- [ ] Develop efficient nuclei extraction SOPs for each tissue. [Max, Lizi]
+
+- [ ] Prep for next EMMC progress meeting (08.07.2024 TBC) [Max, Lizi, Primmy]
+
+    - [x] Perturbation shortlisting for discussion [Lizi, Max]
+
+    - [x] Update repo with times and discussion topics: keep to most important|interesting|controversial topics for meetings (1 week in advance) [Lizi, Max]
+
+    - [x] Conduct technical meetings with PIs, then with Kenny (up to 1 week in advance) [Lizi, Max]
+
+    - [x] Write agenda and email out to PIs (1 week in advance) [Lizi, Max]
+
+- [x] Test out Miltenyi tissue dissociator and determine if Singulator is fit for purpose (Free trial kit from Miltenyi enough for 6 samples - test for PCLS and skin). [Max, Lizi]
+
+    - [x] Induction, H&S training, paperwork etc. [Lizi, Max]
+
+    - [x] Order and stock consumables [Lizi, Max, Sara]
+
+    - [ ] Check vibratome and components are usable [Lizi, Max]
+
+
+# Max
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > Admin and preparation
+
+- [ ] make draft schedule for postdocs in delivery phase to show that it is possible [Lizi, Max]
+
+ >  > Pilot Pilot phase
+
+- [x] Quantify expected median time to first analysis for fresh skin from Edinburgh and Glasgow, with evidence for each. Use existing experience in Sara Brown lab for to work out median time for Edinburgh. The endpoint should be the point of freezing an unperturbed sample for nuclear extraction. [Max]
+
+ >  > EMMC Admin Meetings (latest 10 June 2024)
+
+- [x] Create a single csv file for perturbation lists and delete any old files to avoid confusion. [Max, Lizi]
+
+- [x] Liaise with each PI for populating perturbation lists. [Max, Lizi]
+
+- [ ] Look for additional perturbations (not limited to 4 core tissues). [Max, Lizi]
+
+- [ ] Look for published RNA-Seq (bulk or single cell) data for Alzheimer's to identify similarites, differences between samples for potential perturbation stocks. [Max, Lizi]
+
+- [ ] Develop efficient nuclei extraction SOPs for each tissue. [Max, Lizi]
+
+- [ ] Prep for next EMMC progress meeting (08.07.2024 TBC) [Max, Lizi, Primmy]
+
+    - [x] Perturbation shortlisting for discussion [Lizi, Max]
+
+    - [x] Update repo with times and discussion topics: keep to most important|interesting|controversial topics for meetings (1 week in advance) [Lizi, Max]
+
+    - [x] Conduct technical meetings with PIs, then with Kenny (up to 1 week in advance) [Lizi, Max]
+
+    - [x] Write agenda and email out to PIs (1 week in advance) [Lizi, Max]
+
+- [x] Test out Miltenyi tissue dissociator and determine if Singulator is fit for purpose (Free trial kit from Miltenyi enough for 6 samples - test for PCLS and skin). [Max, Lizi]
+
+    - [x] Induction, H&S training, paperwork etc. [Lizi, Max]
+
+    - [x] Order and stock consumables [Lizi, Max, Sara]
+
+    - [ ] Check vibratome and components are usable [Lizi, Max]
+
+
+# Sara CH
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > Admin and preparation
+
+- [x] review ethical approvals and plan amendments [Sara CH, Wilna, Primmy]
+
+ >  >  > List of "favourite" future tissues > List of future livestock species & tissues
+
+- pig [Sara CH]
+
+
+# Wilna
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > Admin and preparation
+
+- [x] review ethical approvals and plan amendments [Sara CH, Wilna, Primmy]
+
+
+# Primmy
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > Admin and preparation
+
+- [x] review ethical approvals and plan amendments [Sara CH, Wilna, Primmy]
+
+ >  > EMMC Admin Meetings (latest 10 June 2024)
+
+- [ ] Prep for next EMMC progress meeting (08.07.2024 TBC) [Max, Lizi, Primmy]
+
+ >  > Meeting Sara B - 13-June-2024
+
+- [ ] Check costing of courier from Glasgow to Edinburgh [Primmy].
+
+
+# Everyone
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > Computational preparation
+
+- [ ] collate favourite genes [Everyone]
+
+
+# Konrad
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > Computational preparation
+
+- [ ] define list of "GWAS genes" to use for evaluating pilot data, with an arbitrary maximum number of "GWAS genes" arising from any one phenotype [Konrad, Kenny]. Use proximity (eg FANTOM5 TSS =/- 10000bp) to GWAS hits at a given p-value threshold, with a maximum (n) hits from a given study, and a separate maximum (m) hits from a given phenotype in the GWAS catalog. 
+
+- [ ] define "GWAS hits explained" in hard methods terms [Konrad, Andy]
+
+
+# Kenny
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > Computational preparation
+
+- [ ] define list of "GWAS genes" to use for evaluating pilot data, with an arbitrary maximum number of "GWAS genes" arising from any one phenotype [Konrad, Kenny]. Use proximity (eg FANTOM5 TSS =/- 10000bp) to GWAS hits at a given p-value threshold, with a maximum (n) hits from a given study, and a separate maximum (m) hits from a given phenotype in the GWAS catalog. 
+
+ >  >  > List of "favourite" future tissues
+
+- whole blood following whole-body perturbation (e.g. illness, hypoxia) [Kenny]
+
+ >  > Spatial transcriptomics
+
+- Follow up on this paper (using a neural net but similar concept): https://pubmed.ncbi.nlm.nih.gov/29494619/ [Kenny]
+
+
+# Andy
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > Computational preparation
+
+- [ ] define "GWAS hits explained" in hard methods terms [Konrad, Andy]
+
+
+# Varsha
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > List of "favourite" future tissues
+
+- endometrium [Varsha]
+
+
+# Johnny
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > List of "favourite" future tissues
+
+- pulmonary artery [Johnny]
+
+- pulmonary vein [Johnny]
+
+ >  >  > Core data and metrics
+
+- [ ] create systematic wish list of tissues for EMMC. Delegate. Joint synovium, bone, cartilage, bone marrow, uterine tissue, fallopian tube, vas deferens, spleen, liver, gut. What healthy tissues are available; what GWAS data exist? [Johnny]
+
+ >  > Lung perturbations and procurement 16-May-2024
+
+- [x] Update Perturbation list [Johnny]
+
+- [x] Liaise with Jen and Ahsan for funding of research nurse/lung tissue acquisition pipelines [Johnny]
+
+
+# Sara B
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > List of "favourite" future tissues
+
+- subcutaneous fat [Sara B]
+
+ >  > Meeting Sara B - 13-June-2024
+
+- [ ] Sara B to talk to Rebecca Reynolds about access for re-excision c-section skin tissue [Sara B].
+
+
+# Gerry
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > List of "favourite" future tissues > List of future livestock species & tissues
+
+- sheep [Gerry]
+
+
+# Megan
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > List of "favourite" future tissues > List of future livestock species & tissues
+
+- chicken [Megan]
+
+
+# Dan
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > List of "favourite" future tissues > List of future livestock species & tissues
+
+- salmon [Dan]
+
+
+# Tim
+
+shared_tasklist.qmd > EMMC shared notes > Overview and policies > List of "favourite" future tissues > List of future livestock species & tissues
+
+- bivalves [Tim]
+
+
+# Sara
+
+shared_tasklist.qmd > EMMC shared notes > Spatial transcriptomics
+
+- Follow up on this paper: https://pubmed.ncbi.nlm.nih.gov/32161175/ [Sara]
+
+ >  > EMMC Admin Meetings (latest 10 June 2024)
+
+    - [x] Order and stock consumables [Lizi, Max, Sara]
+
+
+# Paul
+
+shared_tasklist.qmd > EMMC shared notes > Pilot Pilot phase
+
+- [ ] choose brain regions [Paul]
+
+
+# Rich
+
+shared_tasklist.qmd > EMMC shared notes > EMMC Admin Meetings (latest 10 June 2024)
+
+    - [x] Clear bench space [Rich, Anto]
+
+
+# Anto
+
+shared_tasklist.qmd > EMMC shared notes > EMMC Admin Meetings (latest 10 June 2024)
+
+    - [x] Clear bench space [Rich, Anto]
+
+
+# Sara B/Primmy/Wilna
+
+shared_tasklist.qmd > EMMC shared notes > Meeting Sara B - 13-June-2024
+
+- [x] Sara B to liase with Primmy/Wilna for MTA and new PO for Glasgow skin samples [Sara B/Primmy/Wilna].
+
+
+# Max/Lizi
+
+shared_tasklist.qmd > EMMC shared notes > Meeting Sara B - 13-June-2024
+
+- [x] Collect 12xs 4-5 mm skin biopsies W/C 17-June [Max/Lizi].
+
+
+# sqaure
+
+test.qmd > heaading
+
+Text [sqaure]
+
+
+# jimbob
+
+test.qmd > another heading
+
+some other text [jimbob]

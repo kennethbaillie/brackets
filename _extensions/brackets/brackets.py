@@ -6,15 +6,24 @@ Usage: python3 brackets.py <input_file_or_dir> <output_file>
 If input_file_or_dir is a directory, reads all files 
 whose names end in "md" 
 (note, no "." so .qmd and .md files are read)
+Hidden files ignored if the name startswith '.' or '_'
 '''
 
 import re
 import os
 import sys
 
-ignored_files=[
-    "README.md"
-]
+#-------------------
+from contextlib import contextmanager
+@contextmanager
+def change_dir(newdir):
+    prevdir = os.getcwd()
+    os.chdir(newdir)     
+    try:
+        yield
+    finally:
+        os.chdir(prevdir)
+#-------------------
 
 exclude_names = ["x", "X", "[ ]"]
 def should_exclude(name):
@@ -98,23 +107,33 @@ def format_output(name_dict):
                 output.append(f"{entry['content']}")
         output.append("")
     return "\n".join(output)
-    
-if __name__ == "__main__":
-    input_file = sys.argv[1]
-    output_file = sys.argv[2]
-    if os.path.isdir(input_file):
+
+ignored_files=[
+    "README.md"
+]
+
+def readfiles(input_path):
+    if os.path.isdir(input_path):
         input_files = [
-            x for x in os.listdir(input_file) 
+            os.path.join(input_path, x) for x in os.listdir(input_path) 
             if x.endswith("md") 
+            and not(x.startswith("_")) 
+            and not(x.startswith(".")) 
             and not(os.path.isdir(x))
             and not x in ignored_files
             ]
     else:
-        input_files = [input_file]
+        input_files = [input_path]
+    return input_files
+
+if __name__ == "__main__":
+    input_filepath = sys.argv[1]
+    output_file = sys.argv[2]
+    input_files = readfiles(input_filepath)
     final_dict = {}
     for input_file in input_files:
         print (input_file)
-        filename = os.path.split(input_file)[-1]
+        thisdir, filename = os.path.split(input_file)
         print ("filename", filename)
         with open(input_file, 'r') as f:
             lines = f.readlines()
