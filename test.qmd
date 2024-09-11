@@ -1,0 +1,14 @@
+---
+filters: [brackets]
+output-file: people
+format: md
+---
+
+
+# heaading
+
+Text [sqaure]
+
+# another heading
+
+some other text [jimbob]

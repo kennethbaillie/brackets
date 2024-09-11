@@ -1,90 +1,81 @@
 
 
-### Ahmad
+# Ahmad
 
-> The big Header at the top
->> An actual list of tasks
+The big Header at the top \> An actual list of tasks
 
--   ☒ the task is complete \[Ahmad\]
+-   ☒ the task is complete [Ahmad](#ahmad)
 
-### Arnold
+# Jane
 
-> The big Header at the top
->> An actual list of tasks
->>> This header comes later
+The big Header at the top \> An actual list of tasks
 
--   and they can be relied upon to appear correctly \[Arnold\]
+1.  This item is assigned [Jane](#jane)
 
-### Bob
+> > This header comes early [Jane](#jane)
 
-> The big Header at the top
->> An actual list of tasks
+-   And actually a fourth one, now added. [Jane](#jane)
 
--   this is a sublist assigned to a person \[Bob\]
+-   list items appear as seperate blocks [Jane](#jane)
 
->>> This header comes early
+> > > This header comes later
+
+-   this item appears under the late header [Jane](#jane)
+
+# Bob
+
+The big Header at the top \> An actual list of tasks
+
+-   this is a sublist assigned to a person [Bob](#bob)
+
+> > This header comes early [Jane](#jane)
 
 -   And a third line with \[Tom, Harry, Bob\].
 
-### Dick
+# Tom
 
-> The big Header at the top
->> An actual list of tasks
->>> This header comes early
+The big Header at the top \> An actual list of tasks \> This header
+comes early [Jane](#jane)
+
+-   This is a sentence with \[Tom, Dick\].
+
+-   And a third line with \[Tom, Harry, Bob\].
+
+# Dick
+
+The big Header at the top \> An actual list of tasks \> This header
+comes early [Jane](#jane)
 
 -   This is a sentence with \[Tom, Dick\].
 
 -   Another line with \[Dick, Harry\].
 
-### Ganesh
+# Harry
 
-> The big Header at the top
->> An actual list of tasks
->>> This header comes early
-
-What about this then, huh? \[Jemima, Ganesh\]
-
-### Harry
-
-> The big Header at the top
->> An actual list of tasks
->>> This header comes early
+The big Header at the top \> An actual list of tasks \> This header
+comes early [Jane](#jane)
 
 -   Another line with \[Dick, Harry\].
 
 -   And a third line with \[Tom, Harry, Bob\].
 
-### Jane
+# Jemima
 
-> The big Header at the top
->> An actual list of tasks
+The big Header at the top \> An actual list of tasks \> This header
+comes early [Jane](#jane)
 
-2.  This item is assigned \[Jane\]
+What about this then? \[Jemima, Ganesh\]
 
->>> This header comes early
+# Ganesh
 
--   And actually a fourth one, now added. \[Jane\]
+The big Header at the top \> An actual list of tasks \> This header
+comes early [Jane](#jane)
 
--   list items appear as seperate blocks \[Jane\]
+What about this then? \[Jemima, Ganesh\]
 
->>> This header comes later
+# Arnold
 
--   this item appears under the late header \[Jane\]
+The big Header at the top \> An actual list of tasks \> This header
+comes early [Jane](#jane) \> This header comes later
 
-### Jemima
-
-> The big Header at the top
->> An actual list of tasks
->>> This header comes early
-
-What about this then, huh? \[Jemima, Ganesh\]
-
-### Tom
-
-> The big Header at the top
->> An actual list of tasks
->>> This header comes early
-
--   This is a sentence with \[Tom, Dick\].
-
--   And a third line with \[Tom, Harry, Bob\].
+-   and they can be relied upon to appear correctly [Arnold](#arnold)

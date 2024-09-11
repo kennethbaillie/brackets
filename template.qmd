@@ -6,7 +6,7 @@ format: md
 
 # The big Header at the top
 
-## An actual list of tasks 
+## An actual list of tasks
 
 - [X] the task is complete [Ahmad]
 
@@ -17,9 +17,9 @@ A numbered list starts here:
 3. This item is not assigned: 
   + this is a sublist
   + this is a sublist assigned to a person [Bob]
-  + this todo
+  + this one not assigned
 
-### This header comes early
+### This header comes early [Jane]
 
 - This is a sentence with [Tom, Dick].
 - Another line with [Dick, Harry].
@@ -28,7 +28,7 @@ A numbered list starts here:
 - And actually a fourth one, now added. [Jane]
 - list items appear as seperate blocks [Jane]
 
-What about this then, huh? [Jemima, Ganesh]
+What about this then? [Jemima, Ganesh]
 
 ### This header comes later
 
