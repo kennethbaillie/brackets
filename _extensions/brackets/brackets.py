@@ -1,3 +1,13 @@
+#!/usr/bin/env python3
+'''
+Pulls out text in square brackets from markdown files 
+in original (or Atx) markdown format.
+Usage: python3 brackets.py <input_file_or_dir> <output_file>
+If input_file_or_dir is a directory, reads all files 
+whose names end in "md" 
+(note, no "." so .qmd and .md files are read)
+'''
+
 import re
 import os
 import sys
