@@ -61,38 +61,31 @@ def process_document(doclines, filename, dictlen):
 
 def prune_headers(name_dict):
     for name, entries in name_dict.items():
-        seen_headers = []  # To track seen headers at each level
+        seen_headers = []
         pruned_entries = []
-
         for entry in entries:
             new_headers = []
             for header in entry['headers']:
-                header_content = header  # Here, header is the header content directly
-
-                # Check if this header has already been seen
-                if header_content not in seen_headers:
-                    new_headers.append(header_content)
-                    seen_headers.append(header_content)  # Mark this header as seen
+                if header not in seen_headers:
+                    new_headers.append(header)
+                    seen_headers.append(header)
                 else:
-                    new_headers.append('')  # Replace the pruned header with an empty string
-
-            # Replace headers with the pruned ones (some replaced with '')
+                    new_headers.append('')
             entry['headers'] = new_headers
             pruned_entries.append(entry)
-
-        name_dict[name] = pruned_entries  # Update the name dict with pruned entries
-
+        name_dict[name] = pruned_entries
     return name_dict
 
-def dict_to_file(name_dict):
+def format_output(name_dict):
     output = []
     for name, entries in name_dict.items():
-        output.append(f"# {name}")
+        output.append(f"# {name}\n")
         for entry in entries:
             headers = " > ".join([h for h in entry["headers"]])
             if len(headers.replace(">","").strip()) > 0:
-                output.append(f"  {headers}")
-            output.append(f"  {entry['content']}")
+                output.append(f"{headers}\n")
+            if len(entry['content'].strip()) > 0:
+                output.append(f"{entry['content']}")
         output.append("")
     return "\n".join(output)
     
@@ -123,7 +116,7 @@ if __name__ == "__main__":
             else:
                 final_dict[key] = value
         print (final_dict)
-    text = dict_to_file(final_dict)
+    text = format_output(final_dict)
     with open(output_file, 'w') as f:
         f.write(text)
     sys.stdout.flush()
