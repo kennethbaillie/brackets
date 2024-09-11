@@ -1,7 +1,7 @@
 ---
 filters: [brackets]
 output-file: people
-format: md
+format: pdf
 ---
 
 # The big Header at the top
