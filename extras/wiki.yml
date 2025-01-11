@@ -1,0 +1,61 @@
+# To use this workflow in your own repository (one with an existing Wiki already set up):
+# 1. Copy this file into the `.github/workflows` directory of your repository.
+# 2. Create a secret named WIKI_PERSONAL_ACCESS_TOKEN (with 'repo' and 'wiki' scopes) in your repo settings.
+#    - Go to your GitHub Settings and click on Developer settings.
+#    - Select Personal access tokens, then Tokens (classic) (or Fine-grained tokens, if you prefer).
+#    - Click on Generate new token, and ensure that the repo and wiki scopes are selected.
+#    - Copy the generated token.
+#    - Add the Token as a Repository Secret
+#    - 
+#    - In your repository on GitHub, click on Settings.
+#    - From the left sidebar, select Secrets and variables > Actions.
+#    - Click New repository secret.
+#    - Set the Name to WIKI_PERSONAL_ACCESS_TOKEN (exactly as shown in the workflow).
+#    - Paste your previously generated personal access token into the Secret field.
+#    - Click Add secret.
+# 3. The workflow will run on pushes or wiki changes (gollum events), automatically updating your Wiki with task collations.
+
+name: Collate tasks by person
+
+on:
+  gollum:
+  push:
+
+jobs:
+  brackets:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Clone brackets
+      run: |
+        git clone https://github.com/baillielab/brackets.git
+
+    - name: Clone wiki repository
+      run: |
+        git clone "https://x-access-token:${{ secrets.WIKI_PERSONAL_ACCESS_TOKEN }}@github.com/${{ github.repository }}.wiki.git" wiki
+
+    - name: Check if last commit was made by github-actions[bot]
+      id: check-commit
+      run: |
+        LAST_COMMITTER=$(git log -1 --pretty=format:'%an')
+        if [ "$LAST_COMMITTER" = "github-actions[bot]" ]; then
+          echo "Action triggered by GitHub Actions bot. Exiting to avoid loop."
+          exit 0
+        fi
+        
+    - name: Create people file
+      run: |
+        python3 brackets/_extensions/brackets/brackets.py ./wiki 
+
+    - name: Upload .md files to Wiki
+      uses: docker://decathlon/wiki-page-creator-action:latest
+      env:
+        ACTION_MAIL: auto@users.noreply.github.com
+        ACTION_NAME: Otto
+        GH_PAT:  ${{ secrets.WIKI_PERSONAL_ACCESS_TOKEN }}
+        MD_FOLDER: ./wiki
+        OWNER: <owner>
+        REPO_NAME: <repo>
+        SKIP_MD: README.md
